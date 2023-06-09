@@ -36,6 +36,15 @@ public class TaskStatus {
     }
 
     /**
+     * Returns wheter the task is done or not.
+     * 
+     * @return true if task is done, false if not
+     */
+    public boolean isDone() {
+        return !(this.completer == null);
+    }
+
+    /**
      * Assignes a user to the TaskStatus object.
      * 
      * @param user user to assign
@@ -107,18 +116,5 @@ public class TaskStatus {
      */
     public User getCompleter() {
         return this.completer;
-    }
-
-    /**
-     * Returns wheter the task is done or not.
-     * 
-     * @return true if task is done, false if not
-     */
-    public boolean isDone() {
-        if (!(this.completer == null)) {
-            return true;
-        }
-
-        return false;
     }
 }
