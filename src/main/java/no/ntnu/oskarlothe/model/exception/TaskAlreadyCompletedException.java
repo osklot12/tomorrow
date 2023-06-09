@@ -9,14 +9,14 @@ package no.ntnu.oskarlothe.model.exception;
  */
 public class TaskAlreadyCompletedException extends RuntimeException {
     /**
-     * Default constructor for the TaskAlreadyCompleted class.
+     * Default constructor for the TaskAlreadyCompletedException class.
      */
     public TaskAlreadyCompletedException() {
         super("Task is already completed.");
     }
 
     /**
-     * Constructor for the TaskAlreadyCompleted class, with custom message.
+     * Constructor for the TaskAlreadyCompletedException class, with custom message.
      * 
      * @param message custom message
      */

@@ -2,6 +2,7 @@ package no.ntnu.oskarlothe.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -45,5 +46,20 @@ public class TaskTest {
                 () -> new Task(header, "", creator));
 
         assertEquals("Task header must be defined.", exception.getMessage());
+    }
+
+    /**
+     * Tests if the matchHeader() method returns true if the header of two tasks
+     * matches, ignoring uppercase letters.
+     */
+    @Test
+    void testMatchHeader() {
+        User creator = new User("The Creator", "Himself", "Developer");
+        Task task1 = new Task("TestHeader", "Some content", creator);
+        Task task2 = new Task("Testheader", "Some other content", creator);
+        
+        boolean matching = task1.matchHeader(task2);
+
+        assertTrue(matching);
     }
 }

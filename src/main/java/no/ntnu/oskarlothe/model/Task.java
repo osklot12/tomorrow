@@ -1,7 +1,5 @@
 package no.ntnu.oskarlothe.model;
 
-import java.util.List;
-
 /**
  * A class representing a task to be done.
  * The Task object is the core part of the application, and is the super class
@@ -29,12 +27,12 @@ public class Task {
      * <br/>
      * The header and creator of a Task must be defined.
      * 
-     * @param header the header of the task
+     * @param header  the header of the task
      * @param content the descriptive text of the task
      * @param creator the user that created the task
      */
     public Task(String header, String content, User creator) {
-        if (header.isBlank() || header == null) {
+        if (header == null || header.isBlank()) {
             throw new IllegalArgumentException("Task header must be defined.");
         }
 
@@ -46,6 +44,17 @@ public class Task {
         this.header = header;
         this.content = content;
         this.creator = creator;
+    }
+
+    /**
+     * Checks if the task header matches the header of another task.
+     * Ignores uppercase.
+     * 
+     * @param task the task to compare
+     * @return true if header matches, false if not
+     */
+    public boolean matchHeader(Task task) {
+        return this.header.toLowerCase().equals(task.getHeader().toLowerCase());
     }
 
     /**
@@ -82,5 +91,29 @@ public class Task {
      */
     public User getCreator() {
         return this.creator;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+        result = 31 * result + this.header.hashCode();
+        result = 31 * result + this.content.hashCode();
+        result = 31 * result + this.creator.hashCode();
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+
+        if (!(o instanceof Task)) {
+            return false;
+        }
+
+        Task task = (Task) o;
+        return this.header.equals(task.getHeader()) && this.content.equals(task.getContent())
+                && this.creator.equals(task.getCreator());
     }
 }

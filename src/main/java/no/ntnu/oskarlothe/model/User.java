@@ -50,18 +50,18 @@ public class User {
      * @param nickname  the nickname of the user
      */
     public User(String firstName, String lastName, String nickname) {
-        if (firstName.isBlank() || firstName == null) {
+        if (firstName == null || firstName.isBlank()) {
             throw new IllegalArgumentException("First name must be defined.");
         }
 
-        if (lastName.isBlank() || lastName == null) {
+        if (lastName == null || lastName.isBlank()) {
             throw new IllegalArgumentException("Last name must be defined.");
         }
 
         this.firstName = firstName;
         this.lastName = lastName;
 
-        if (nickname.isBlank()) {
+        if (nickname == null || nickname.isBlank()) {
             this.nickname = "";
         } else {
             this.nickname = nickname;
