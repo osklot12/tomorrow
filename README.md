@@ -4,10 +4,10 @@ With busy weekdays and alot of things to do, it can be hard to keep track of eve
 <br/>
 
 ## What it does
-Tomorrow simply lets you keep a calendar of tasks, with it's main focus being to plan your next day. The application allows for tasks for short intervals, like a day, or longer intervals, like a year. Either way, Tomorrow will be your hub for all the tasks you have flying in your head. The application is suitable both for personal use or for businesses, as it lets you create 'enviroments', which is a way to allow multiple users be assigned to the same task. Tasks can also exist of multiple 'subtasks', which together can make up more complex tasks.
+Tomorrow simply lets you keep a calendar of tasks, with it's main focus being to plan your next day. The application allows for tasks for short periods, like a day, or longer periods, like a year. Either way, Tomorrow will be your hub for all the tasks you have flying in your head. The application is suitable both for personal use or for businesses, as it lets you create 'enviroments', which is a way to allow multiple users be assigned to the same task. Tasks can also exist of multiple 'subtasks', which together can make up more complex tasks.
 <br/>
 
-Each week, month and year, a report will be generated with statistics from the given time interval. The report will include information about how many tasks were completed, the percentage that were done, how it compares to the previous interval of the same amount of time, and other useful information.
+Each week, month and year, a report will be generated with statistics from the given time period. The report will include information about how many tasks were completed, the percentage that were done, how it compares to the previous period of the same amount of time, and other useful information.
 <br/>
 
 ## What makes Tomorrow unique
