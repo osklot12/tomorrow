@@ -11,23 +11,14 @@ Each week, month and year, a report will be generated with statistics from the g
 <br/>
 
 ## What makes Tomorrow unique
-<ul>
-<li>
-**Fast and convenient**
-<br/>
+### Fast and convenient
 Alot of other task tracking software makes tracking your tasks a task itself. Tomorrow aims to minimize the required effort for the user to track their tasks, while keeping functionality for those more invested. Tracking your tasks should be easy and fast, and Tomorrow excels at exactly this.
 <br/>
-</li>
 
-<li>
-**Functionality for the serious user**
-<br/>
+### Functionality for the serious user
 Some people say you got to choose between functionality and user friendlyness. We do not listen to that, and chose to aim for both. All extra functionality is presented in a way that does not interfere with the simplistic and user friendly design. This way, Tomorrow offers a more professional way of use for the serious user, without ruining the experience for the casual one.
 <br/>
-</li>
-<li>
-**Suits both personal use and businesse**
-<br/>
+
+### Suits both personal use and businesse
 Tomorrow works just as good for personal use as it does for businesses. Get your own thoughts and plans into the application for a more structured life, or build an enviroment for your business and view reports with statistics. Either way, Tomorrow got your back.
-</li>
-</ul>
+
