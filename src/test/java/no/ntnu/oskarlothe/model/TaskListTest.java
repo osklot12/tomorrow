@@ -2,6 +2,7 @@ package no.ntnu.oskarlothe.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -248,5 +249,18 @@ public class TaskListTest {
         assertFalse(result.contains(task2));
         assertTrue(result.contains(task1));
         assertTrue(result.contains(task3));
+    }
+
+    /**
+     * Tests that the copy() method makes a copy of the TaskList object as expected.
+     */
+    @Test
+    void testCopy() {
+        TaskList list = new TaskList();
+        TaskList copy = list.copy();
+
+        copy.addTask(new Task("Sampletask", "This is simply a sampletask", new User("Sample user", "sample user")));
+
+        assertNotEquals(list, copy);
     }
 }

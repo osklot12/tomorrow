@@ -211,4 +211,41 @@ public class TaskList {
 
         return result;
     }
+
+    /**
+     * Returns a copy of the object.
+     * 
+     * @return TaskList object copy
+     */
+    public TaskList copy() {
+        TaskList copy = new TaskList();
+        this.tasks.forEach(
+            (task) -> {
+                copy.addTask(task);
+            }
+        );
+
+        return copy;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+        result = 31 * result + this.tasks.hashCode();
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+
+        if (!(o instanceof TaskList)) {
+            return false;
+        }
+
+        TaskList taskList = (TaskList) o;
+        return this.getTasks().equals(taskList.getTasks());
+    }
 }

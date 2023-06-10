@@ -1,7 +1,10 @@
 package no.ntnu.oskarlothe.model.period;
 
+import java.time.LocalDateTime;
+
 import no.ntnu.oskarlothe.model.Report;
 import no.ntnu.oskarlothe.model.TaskList;
+import no.ntnu.oskarlothe.model.User;
 
 /**
  * An abstract class representing a period of time.
@@ -31,7 +34,7 @@ public abstract class Period {
         if (tasks == null) {
             throw new IllegalArgumentException("TaskList cannot be null.");
         }
-        
+
         this.tasks = tasks;
     }
 
@@ -49,5 +52,20 @@ public abstract class Period {
      * 
      * @return report object
      */
-    abstract Report generateReport();
+    abstract Report generateReport(User creator, LocalDateTime generatedAt);
+
+    /**
+     * Returns the a decriptive text of the period.
+     * 
+     * @return String explaining period
+     */
+    abstract String getPeriodAsString();
+
+    /**
+     * Returns a copy of the current version of of the period, allowing for storing
+     * of the exact state of the period in that instance.
+     * 
+     * @return copy of the period
+     */
+    abstract Period copy();
 }
