@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import no.ntnu.oskarlothe.model.Report;
 import no.ntnu.oskarlothe.model.TaskList;
 import no.ntnu.oskarlothe.model.User;
+import no.ntnu.oskarlothe.model.regionstrategy.RegionStrategy;
 
 /**
  * A class representing an period of 24 hours: a full day.
@@ -67,8 +68,8 @@ public class Day extends Period {
     }
 
     @Override
-    public String getPeriodAsString() {
-        return null;
+    public String getPeriodAsString(RegionStrategy region) {
+        return region.getDateAsWords(this.date);
     }
 
     @Override

@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import no.ntnu.oskarlothe.model.Report;
 import no.ntnu.oskarlothe.model.TaskList;
 import no.ntnu.oskarlothe.model.User;
+import no.ntnu.oskarlothe.model.regionstrategy.RegionStrategy;
 
 /**
  * An abstract class representing a period of time.
@@ -59,7 +60,7 @@ public abstract class Period {
      * 
      * @return String explaining period
      */
-    abstract String getPeriodAsString();
+    abstract String getPeriodAsString(RegionStrategy region);
 
     /**
      * Returns a copy of the current version of of the period, allowing for storing
