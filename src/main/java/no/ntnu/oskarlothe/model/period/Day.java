@@ -38,7 +38,7 @@ public class Day extends Period {
     }
 
     /**
-     * Constructor for the Day class, with an predefined TaskList object.
+     * Constructor for the Day class, with a predefined TaskList object.
      * 
      * @param date  the date of the day
      * @param tasks predefined TaskList object

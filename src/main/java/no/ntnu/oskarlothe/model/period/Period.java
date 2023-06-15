@@ -49,6 +49,15 @@ public abstract class Period {
     }
 
     /**
+     * Checks if the Period has any tasks.
+     * 
+     * @return true if any tasks exist, false if not
+     */
+    public boolean hasTasks() {
+        return !(this.tasks.getTasks().isEmpty());
+    }
+
+    /**
      * Generates a report based on the period of time.
      * 
      * @return report object

@@ -9,6 +9,10 @@ import no.ntnu.oskarlothe.model.period.Period;
  * state of that period object at an instance in time.
  * In other words, the report holds information about a period object at a
  * spesific time.
+ * <br/>
+ * <br/>
+ * Reports can not only be generated for individual days, but also instances of
+ * the Interval class.
  * 
  * @author Oskar Lothe
  * @version 1.0-SNAPSHOT

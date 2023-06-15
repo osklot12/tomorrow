@@ -36,6 +36,20 @@ public class TaskStatus {
     }
 
     /**
+     * Constructor for the TaskStatus class, with a predefined list of assignees.
+     * 
+     * @param assignees list of users assinged to the task
+     */
+    public TaskStatus(List<User> assignees) {
+        if (assignees == null) {
+            throw new IllegalArgumentException("Assignees cannot be null");
+        }
+
+        this.assignees = assignees;
+        this.completer = null;
+    }
+
+    /**
      * Returns wheter the task is done or not.
      * 
      * @return true if task is done, false if not

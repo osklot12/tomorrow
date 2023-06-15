@@ -47,6 +47,35 @@ public class Task {
     }
 
     /**
+     * Constructor for the Task class.
+     * <br/>
+     * <br/>
+     * The header and creator of a Task must be defined.
+     * 
+     * @param header  the header of the task
+     * @param content the descriptive text of the task
+     * @param creator the user that created the task
+     */
+    public Task(TaskStatus status, String header, String content, User creator) {
+        if (status == null) {
+            throw new IllegalArgumentException("TaskStatus cannot be null.");
+        }
+
+        if (header == null || header.isBlank()) {
+            throw new IllegalArgumentException("Task header must be defined.");
+        }
+
+        if (creator == null) {
+            throw new IllegalArgumentException("Creator of task must be defined.");
+        }
+
+        this.status = status;
+        this.header = header;
+        this.content = content;
+        this.creator = creator;
+    }
+
+    /**
      * Checks if the task header matches the header of another task.
      * Ignores uppercase.
      * 
@@ -91,6 +120,15 @@ public class Task {
      */
     public User getCreator() {
         return this.creator;
+    }
+
+    /**
+     * Returns a copy of the Task.
+     * 
+     * @return copy of Task object
+     */
+    public Task copy() {
+        return new Task(new TaskStatus(this.status.getAssignees()), this.header, this.content, this.creator);
     }
 
     @Override
