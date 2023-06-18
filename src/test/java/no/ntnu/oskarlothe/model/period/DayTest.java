@@ -64,7 +64,7 @@ public class DayTest {
         assertEquals(day, report.getPeriod());
 
         Task task = new Task("Do laundry", "Do the laundry already!", user);
-        day.getTaskList().addTask(task);
+        day.getTaskList().add(task);
 
         // now that the original period has changed, the two should not be equal
         assertNotEquals(day, report.getPeriod());

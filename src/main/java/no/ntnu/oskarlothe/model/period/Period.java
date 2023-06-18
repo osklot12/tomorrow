@@ -54,7 +54,7 @@ public abstract class Period {
      * @return true if any tasks exist, false if not
      */
     public boolean hasTasks() {
-        return !(this.tasks.getTasks().isEmpty());
+        return !(this.tasks.isEmpty());
     }
 
     /**
@@ -65,7 +65,7 @@ public abstract class Period {
     abstract Report generateReport(User creator, LocalDateTime generatedAt);
 
     /**
-     * Returns the a decriptive text of the period.
+     * Returns the a descriptive text of the period.
      * 
      * @return String explaining period
      */

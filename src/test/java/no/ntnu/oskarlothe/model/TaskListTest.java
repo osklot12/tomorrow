@@ -10,7 +10,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import no.ntnu.oskarlothe.model.exception.NoSuchTaskException;
 import no.ntnu.oskarlothe.model.exception.TaskAlreadyExistsException;
 
 /**
@@ -29,9 +28,9 @@ public class TaskListTest {
         Task task = new Task("TestTask", null, new User("John", "Johnson", "Johnny"));
         TaskList list = new TaskList();
 
-        list.addTask(task);
+        list.add(task);
 
-        assertEquals(task, list.getTasks().get(0));
+        assertEquals(task, list.get(0));
     }
 
     /**
@@ -43,40 +42,11 @@ public class TaskListTest {
         Task task = new Task("TestTask", null, new User("John", "Johnson", "Johnny"));
         TaskList list = new TaskList();
 
-        list.addTask(task);
+        list.add(task);
         Throwable exception = assertThrows(TaskAlreadyExistsException.class,
-                () -> list.addTask(task));
+                () -> list.add(task));
 
         assertEquals("The task is already in the list.", exception.getMessage());
-    }
-
-    /**
-     * Tests that the removeTask() method removes a task that exists in the list.
-     */
-    @Test
-    void testRemoveTaskSuccess() {
-        Task task = new Task("TestTask", null, new User("John", "Johnson", "Johnny"));
-        TaskList list = new TaskList();
-
-        list.addTask(task);
-        list.removeTask(task);
-
-        assertTrue(list.getTasks().isEmpty());
-    }
-
-    /**
-     * Tests that the removeTask() method using a task that does not exist in the
-     * list, throws an exception.
-     */
-    @Test
-    void testRemoveTaskNoSuchTask() {
-        Task task = new Task("TestTask", null, new User("John", "Johnson", "Johnny"));
-        TaskList list = new TaskList();
-
-        Throwable exception = assertThrows(NoSuchTaskException.class,
-                () -> list.removeTask(task));
-
-        assertEquals("There is no such task in the list.", exception.getMessage());
     }
 
     /**
@@ -89,9 +59,9 @@ public class TaskListTest {
         Task task3 = new Task("TextTaskToo", null, new User("John", "Johnson", "Johnny"));
         TaskList list = new TaskList();
 
-        list.addTask(task1);
-        list.addTask(task2);
-        list.addTask(task3);
+        list.add(task1);
+        list.add(task2);
+        list.add(task3);
 
         List<Task> result = list.searchByHeader("test");
 
@@ -111,9 +81,9 @@ public class TaskListTest {
         Task task3 = new Task("TextTaskToo", null, new User("John", "Johnson", "Johnny"));
         TaskList list = new TaskList();
 
-        list.addTask(task1);
-        list.addTask(task2);
-        list.addTask(task3);
+        list.add(task1);
+        list.add(task2);
+        list.add(task3);
 
         List<Task> result = list.searchByHeader("nonexistent");
 
@@ -131,9 +101,9 @@ public class TaskListTest {
                 new User("John", "Johnson", "Johnny"));
         TaskList list = new TaskList();
 
-        list.addTask(task1);
-        list.addTask(task2);
-        list.addTask(task3);
+        list.add(task1);
+        list.add(task2);
+        list.add(task3);
 
         List<Task> result = list.searchByContent("this is ");
 
@@ -154,9 +124,9 @@ public class TaskListTest {
         Task task3 = new Task("TextTaskToo", "This isn't the content. Wait, it is!", creator1);
         TaskList list = new TaskList();
 
-        list.addTask(task1);
-        list.addTask(task2);
-        list.addTask(task3);
+        list.add(task1);
+        list.add(task2);
+        list.add(task3);
 
         List<Task> result = list.searchByCreator(creator1);
 
@@ -180,9 +150,9 @@ public class TaskListTest {
 
         TaskList list = new TaskList();
 
-        list.addTask(task1);
-        list.addTask(task2);
-        list.addTask(task3);
+        list.add(task1);
+        list.add(task2);
+        list.add(task3);
 
         task1.getStatus().assign(assignee1);
         task1.getStatus().assign(assignee2);
@@ -210,9 +180,9 @@ public class TaskListTest {
 
         TaskList list = new TaskList();
 
-        list.addTask(task1);
-        list.addTask(task2);
-        list.addTask(task3);
+        list.add(task1);
+        list.add(task2);
+        list.add(task3);
 
         task2.getStatus().assign(creator);
         task2.getStatus().complete(creator);
@@ -237,9 +207,9 @@ public class TaskListTest {
 
         TaskList list = new TaskList();
 
-        list.addTask(task1);
-        list.addTask(task2);
-        list.addTask(task3);
+        list.add(task1);
+        list.add(task2);
+        list.add(task3);
 
         task2.getStatus().assign(creator);
         task2.getStatus().complete(creator);
@@ -259,7 +229,7 @@ public class TaskListTest {
         TaskList list = new TaskList();
         TaskList copy = list.copy();
 
-        copy.addTask(new Task("Sampletask", "This is simply a sampletask", new User("Sample user", "sample user")));
+        copy.add(new Task("Sampletask", "This is simply a sampletask", new User("Sample user", "sample user")));
 
         assertNotEquals(list, copy);
     }

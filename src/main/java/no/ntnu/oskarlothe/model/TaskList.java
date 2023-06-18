@@ -13,14 +13,12 @@ import no.ntnu.oskarlothe.model.exception.TaskAlreadyExistsException;
  * @author Oskar Lothe
  * @version 1.0-SNAPSHOT
  */
-public class TaskList {
-    private List<Task> tasks;
-
+public class TaskList extends ArrayList<Task> {
     /**
      * Default constructor for the TaskList class.
      */
     public TaskList() {
-        this.tasks = new ArrayList<>();
+        super();
     }
 
     /**
@@ -29,20 +27,7 @@ public class TaskList {
      * @param tasks list of task objects
      */
     public TaskList(List<Task> tasks) {
-        if (tasks == null) {
-            throw new IllegalArgumentException("List of tasks cannot be null.");
-        }
-
-        this.tasks = tasks;
-    }
-
-    /**
-     * Returns the list of tasks.
-     * 
-     * @return list of task objects
-     */
-    public List<Task> getTasks() {
-        return this.tasks;
+        super(tasks);
     }
 
     /**
@@ -51,33 +36,17 @@ public class TaskList {
      * 
      * @param task task to add
      */
-    public void addTask(Task task) {
+    @Override
+    public boolean add(Task task) {
         if (task == null) {
             throw new IllegalArgumentException("Cannot add task to TaskList, because task is null.");
         }
 
-        if (this.tasks.contains(task)) {
+        if (this.contains(task)) {
             throw new TaskAlreadyExistsException("The task is already in the list.");
         }
 
-        this.tasks.add(task);
-    }
-
-    /**
-     * Removes a task from the list.
-     * 
-     * @param task task to remove
-     */
-    public void removeTask(Task task) {
-        if (task == null) {
-            throw new IllegalArgumentException("Cannot remove task from TaskList, because task is null.");
-        }
-
-        if (!(this.tasks.contains(task))) {
-            throw new NoSuchTaskException("There is no such task in the list.");
-        }
-
-        this.tasks.remove(task);
+        return super.add(task);
     }
 
     /**
@@ -96,7 +65,7 @@ public class TaskList {
 
         List<Task> result = new ArrayList<>();
 
-        this.tasks.forEach(
+        this.forEach(
                 (task) -> {
                     if (task.getHeader().toLowerCase().contains(key.toLowerCase())) {
                         result.add(task);
@@ -120,7 +89,7 @@ public class TaskList {
 
         List<Task> result = new ArrayList<>();
 
-        this.tasks.forEach(
+        this.forEach(
                 (task) -> {
                     if (task.getContent().toLowerCase().contains(key.toLowerCase())) {
                         result.add(task);
@@ -144,7 +113,7 @@ public class TaskList {
 
         List<Task> result = new ArrayList<>();
 
-        this.tasks.forEach(
+        this.forEach(
                 (task) -> {
                     if (task.getCreator().equals(creator)) {
                         result.add(task);
@@ -168,7 +137,7 @@ public class TaskList {
 
         List<Task> result = new ArrayList<>();
 
-        this.tasks.forEach(
+        this.forEach(
             (task) -> {
                 if (task.getStatus().getAssignees().contains(assignee)) {
                     result.add(task);
@@ -187,7 +156,7 @@ public class TaskList {
     public List<Task> getDoneTasks() {
         List<Task> result = new ArrayList<>();
 
-        this.tasks.forEach(
+        this.forEach(
             (task) -> {
                 if (task.getStatus().isDone()) {
                     result.add(task);
@@ -206,7 +175,7 @@ public class TaskList {
     public List<Task> getPendingTasks() {
         List<Task> result = new ArrayList<>();
 
-        result.addAll(this.tasks);
+        result.addAll(this);
         result.removeAll(this.getDoneTasks());
 
         return result;
@@ -219,33 +188,12 @@ public class TaskList {
      */
     public TaskList copy() {
         TaskList copy = new TaskList();
-        this.tasks.forEach(
+        this.forEach(
             (task) -> {
-                copy.addTask(task);
+                copy.add(task);
             }
         );
 
         return copy;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = 17;
-        result = 31 * result + this.tasks.hashCode();
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == this) {
-            return true;
-        }
-
-        if (!(o instanceof TaskList)) {
-            return false;
-        }
-
-        TaskList taskList = (TaskList) o;
-        return this.getTasks().equals(taskList.getTasks());
     }
 }
