@@ -3,7 +3,6 @@ package no.ntnu.oskarlothe.model.period;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import no.ntnu.oskarlothe.model.IntervalList;
 import no.ntnu.oskarlothe.model.Report;
 import no.ntnu.oskarlothe.model.TaskList;
 import no.ntnu.oskarlothe.model.User;
@@ -61,10 +60,6 @@ public class Day extends Period {
      */
     public LocalDate getDate() {
         return this.date;
-    }
-
-    public void loadIntervalTasks(IntervalList intervalList) {
-        this.getTaskList().add(null);
     }
 
     @Override

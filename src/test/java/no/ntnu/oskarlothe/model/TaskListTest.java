@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -232,5 +234,66 @@ public class TaskListTest {
         copy.add(new Task("Sampletask", "This is simply a sampletask", new User("Sample user", "sample user")));
 
         assertNotEquals(list, copy);
+    }
+
+    /**
+     * Tests that the addAll() method works as expected, and do not add duplicates.
+     */
+    @Test
+    void testAddAll() {
+        User creator = new User("John", "The creator", "Johnny");
+
+        Task task1 = new Task("Do the dishes", null, creator);
+
+        Task task2 = new Task("Walk the dog", null, creator);
+
+        List<Task> listOfTasks = new ArrayList<>();
+
+        listOfTasks.add(task1);
+
+        listOfTasks.add(task2);
+
+        TaskList list = new TaskList();
+
+        list.addAll(listOfTasks);
+
+        list.addAll(listOfTasks);
+
+        assertTrue(list.contains(task1));
+
+        assertTrue(list.contains(task2));
+
+        assertTrue(list.size() == 2);
+    }
+
+    /**
+     * Tests that the getRepeatingTasksForDate() method returns a list of repeating
+     * tasks as expected.
+     */
+    @Test
+    void testGetRepeatingTasksForDate() {
+        User creator = new User("John", "Johnny", "");
+        
+        Task task1 = new Task("Empty the trash", "The trash is full and needs to be emptied.", creator);
+        
+        LocalDate startDate = LocalDate.parse("2023-06-05");
+
+        Interval interval = new Interval(startDate, 1);
+
+        interval.addWeekday("monday");
+
+        RepeatingTask repeater = new RepeatingTask("Mop the floor", "The floor is dirty.", creator, interval);
+
+        TaskList taskList = new TaskList();
+
+        taskList.add(task1);
+
+        taskList.add(repeater);
+
+        List<RepeatingTask> result = taskList.getRepeatingTasksForDate(startDate);
+
+        assertTrue(result.contains(repeater));
+
+        assertFalse(result.contains(task1));
     }
 }

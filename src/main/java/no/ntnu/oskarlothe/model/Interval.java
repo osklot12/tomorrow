@@ -1,24 +1,18 @@
-package no.ntnu.oskarlothe.model.period;
+package no.ntnu.oskarlothe.model;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-
-import no.ntnu.oskarlothe.model.Report;
-import no.ntnu.oskarlothe.model.TaskList;
-import no.ntnu.oskarlothe.model.User;
-import no.ntnu.oskarlothe.model.WeekdayList;
-import no.ntnu.oskarlothe.model.regionstrategy.RegionStrategy;
+import java.time.temporal.ChronoUnit;
 
 /**
  * A class representing an interval of time.
- * Instead of being assigned to a single date or point in time, the tasks of an
- * Interval is assigned to multiple points in time, occuring every time the
- * interval hits.
+ * An instance of the Interval class has a set start date, which defines the
+ * starting date of the interval, as well as a weekday list and week interval,
+ * both deciding when which days the interval hits.
  * 
  * @author Oskar Lothe
  * @version 1.0-SNAPSHOT
  */
-public class Interval extends Period {
+public class Interval {
     private LocalDate startDate;
 
     private WeekdayList days;
@@ -33,29 +27,6 @@ public class Interval extends Period {
      */
     public Interval(LocalDate startDate, int weekInterval) {
         super();
-
-        if (startDate == null) {
-            throw new IllegalArgumentException("Start date cannot be null.");
-        }
-
-        if (weekInterval < 1) {
-            throw new IllegalArgumentException("Week interval cannot be smaller than 1.");
-        }
-
-        this.startDate = startDate;
-        this.days = new WeekdayList();
-        this.weekInterval = weekInterval;
-    }
-
-    /**
-     * Constructor for the Interval class, using a predefined tasklist.
-     * 
-     * @param tasks the TaskList object to add
-     * @param startDate    the starting date for the interval
-     * @param weekInterval the amount of weeks between each iteration
-     */
-    public Interval(TaskList tasks, LocalDate startDate, int weekInterval) {
-        super(tasks);
 
         if (startDate == null) {
             throw new IllegalArgumentException("Start date cannot be null.");
@@ -117,19 +88,29 @@ public class Interval extends Period {
         return this.days.remove(weekday);
     }
 
-    @Override
-    public Period copy() {
-        return new Interval(this.getTaskList(), startDate, weekInterval);
-    }
+    /**
+     * Checks wheter the repeating task hits a certain date.
+     * 
+     * @param date the date to check for
+     * @return true if task hits, false if not
+     */
+    public boolean hitsDate(LocalDate date) {
+        if (date == null) {
+            throw new IllegalArgumentException("Date cannot be null.");
+        }
 
-    @Override
-    public Report generateReport(User creator, LocalDateTime generatedAt) {
-        return new Report(creator, generatedAt, this);
-    }
+        LocalDate intervalStartDate = this.getStartDate();
 
-    @Override
-    public String getPeriodAsString(RegionStrategy region) {
-        return null;
+        boolean isAfterOrOn = date.isAfter(intervalStartDate) || date.equals(intervalStartDate);
+
+        String weekday = date.getDayOfWeek().toString();
+
+        boolean hitsDay = this.days.containsIgnoreCase(weekday);
+
+        long weeksBetween = ChronoUnit.WEEKS.between(intervalStartDate, date);
+
+        boolean hitsWeek = (weeksBetween % this.getWeekInterval() == 0);
+
+        return (isAfterOrOn && hitsDay && hitsWeek);
     }
 }
- 

@@ -1,9 +1,10 @@
 package no.ntnu.oskarlothe.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
-import no.ntnu.oskarlothe.model.exception.NoSuchTaskException;
 import no.ntnu.oskarlothe.model.exception.TaskAlreadyExistsException;
 
 /**
@@ -47,6 +48,16 @@ public class TaskList extends ArrayList<Task> {
         }
 
         return super.add(task);
+    }
+
+    @Override
+    public boolean addAll(Collection<? extends Task> c) {
+        for (Task task : c) {
+            if (!this.contains(task)) {
+                this.add(task);
+            }
+        }
+        return true;
     }
 
     /**
@@ -177,6 +188,26 @@ public class TaskList extends ArrayList<Task> {
 
         result.addAll(this);
         result.removeAll(this.getDoneTasks());
+
+        return result;
+    }
+
+    /**
+     * Returns all repeating tasks in the list that hits a certain date.
+     * 
+     * @param date the date to search for
+     * @return a list of repeating tasks
+     */
+    public List<RepeatingTask> getRepeatingTasksForDate(LocalDate date) {
+        List<RepeatingTask> result = new ArrayList<>();
+
+        for (Task task : this) {
+            if (task instanceof RepeatingTask) {
+                RepeatingTask repeater = (RepeatingTask) task;
+
+                if (repeater.getInterval().hitsDate(date)) result.add(repeater);
+            }
+        }
 
         return result;
     }

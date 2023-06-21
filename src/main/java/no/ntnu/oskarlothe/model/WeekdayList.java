@@ -16,7 +16,7 @@ public class WeekdayList extends ArrayList<String> {
 
     @Override
     public boolean add(String weekday) {
-        if (isValidWeekday(weekday) && !(this.contains(weekday.toLowerCase()))) {
+        if (isValidWeekday(weekday) && !(this.containsIgnoreCase(weekday))) {
             return super.add(weekday.toLowerCase());
         }
 
@@ -35,6 +35,14 @@ public class WeekdayList extends ArrayList<String> {
                 return true;
             }
         }
+        return false;
+    }
+
+    public boolean containsIgnoreCase(String key) {
+        for (String weekday : this) {
+            if (weekday.equalsIgnoreCase(key)) return true;
+        }
+
         return false;
     }
 }
