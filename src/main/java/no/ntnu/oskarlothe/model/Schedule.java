@@ -22,6 +22,9 @@ public class Schedule {
 
     private TaskList repeatingTasks;
 
+    /**
+     * Default constructor for the Schedule class.
+     */
     public Schedule() {
         this.days = new DayList();
         this.repeatingTasks = new TaskList();
@@ -35,5 +38,23 @@ public class Schedule {
      */
     public Day getDay(LocalDate date) {
         return DayGenerator.generate(date, this.days, this.repeatingTasks);
+    }
+
+    /**
+     * Returns the list of days.
+     * 
+     * @return DayList object
+     */
+    public DayList getDayList() {
+        return this.days;
+    }
+
+    /**
+     * Returns the list of repeating tasks.
+     * 
+     * @return TaskList containing repeating task objects
+     */
+    public TaskList getRepeatingTasks() {
+        return this.repeatingTasks;
     }
 }
