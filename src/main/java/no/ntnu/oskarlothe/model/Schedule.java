@@ -7,8 +7,6 @@ import no.ntnu.oskarlothe.model.period.Day;
 /**
  * A class representing a schedule in the application.
  * A schedule consists of a list of days, as well as a list of repeating tasks.
- * The schedule class is responsible for navigating the days, as well as
- * implementing repeating tasks on the proper days.
  * <br/>
  * <br/>
  * The dayList field only contains days that holds data manipulated by the user.
@@ -34,7 +32,7 @@ public class Schedule {
      * Returns the day for a spesific date.
      * 
      * @param date date of the day
-     * @return day object mathcing the given date
+     * @return day object matching the given date
      */
     public Day getDay(LocalDate date) {
         return DayGenerator.generate(date, this.days, this.repeatingTasks);
