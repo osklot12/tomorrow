@@ -229,7 +229,7 @@ public class TaskListTest {
     @Test
     void testCopy() {
         TaskList list = new TaskList();
-        TaskList copy = list.copy();
+        TaskList copy = list.clone();
 
         copy.add(new Task("Sampletask", "This is simply a sampletask", new User("Sample user", "sample user")));
 

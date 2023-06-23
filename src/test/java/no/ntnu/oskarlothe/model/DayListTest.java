@@ -8,8 +8,6 @@ import java.time.LocalDate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import no.ntnu.oskarlothe.model.period.Day;
-
 /**
  * JUnit testing for the DayList class.
  * 

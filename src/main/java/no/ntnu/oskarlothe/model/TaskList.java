@@ -217,14 +217,14 @@ public class TaskList extends ArrayList<Task> {
      * 
      * @return TaskList object copy
      */
-    public TaskList copy() {
-        TaskList copy = new TaskList();
+    public TaskList clone() {
+        TaskList clone = new TaskList();
         this.forEach(
             (task) -> {
-                copy.add(task);
+                clone.add(task);
             }
         );
 
-        return copy;
+        return clone;
     }
 }

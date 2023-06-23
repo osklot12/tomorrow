@@ -1,4 +1,4 @@
-package no.ntnu.oskarlothe.model.period;
+package no.ntnu.oskarlothe.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -8,10 +8,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
-
-import no.ntnu.oskarlothe.model.Report;
-import no.ntnu.oskarlothe.model.Task;
-import no.ntnu.oskarlothe.model.User;
 
 /**
  * JUnit testing for the Day class.
@@ -41,7 +37,7 @@ public class DayTest {
         LocalDate date = LocalDate.now();
         Day day = new Day(date);
 
-        assertFalse(day.getTaskList() == null);
+        assertFalse(day == null);
     }
 
     /**
@@ -59,14 +55,14 @@ public class DayTest {
 
         Report report = day.generateReport(user, timestamp);
 
-        // since the period returned by the report is a copy of the original period,
+        // since the TaskList returned by the report is a copy of the original TaskList,
         // they should be equal at this moment
-        assertEquals(day, report.getPeriod());
+        assertEquals(day, report.getTaskList());
 
         Task task = new Task("Do laundry", "Do the laundry already!", user);
-        day.getTaskList().add(task);
+        day.add(task);
 
-        // now that the original period has changed, the two should not be equal
-        assertNotEquals(day, report.getPeriod());
+        // now that the original TaskList has changed, the two should not be equal
+        assertNotEquals(day, report.getTaskList());
     }
 }

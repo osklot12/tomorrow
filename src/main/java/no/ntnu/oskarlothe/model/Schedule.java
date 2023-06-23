@@ -2,8 +2,6 @@ package no.ntnu.oskarlothe.model;
 
 import java.time.LocalDate;
 
-import no.ntnu.oskarlothe.model.period.Day;
-
 /**
  * A class representing a schedule in the application.
  * A schedule consists of a list of days, as well as a list of repeating tasks.

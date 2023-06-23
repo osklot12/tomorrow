@@ -2,8 +2,6 @@ package no.ntnu.oskarlothe.model;
 
 import java.time.LocalDate;
 
-import no.ntnu.oskarlothe.model.period.Day;
-
 /**
  * A class responsible for generating days.
  * 
@@ -31,11 +29,11 @@ public class DayGenerator {
         if (day == null) {
             day = new Day(date);
         } else {
-            day = new Day(date, day.getTaskList().copy());
+            day = new Day(date, day.clone());
         }
 
         for (RepeatingTask repeater : repeaters.getRepeatingTasksForDate(date)) {
-            day.getTaskList().add(repeater.copy());
+            day.add(repeater.copy());
         }
 
         return day;

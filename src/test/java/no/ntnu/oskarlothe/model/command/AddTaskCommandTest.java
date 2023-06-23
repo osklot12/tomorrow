@@ -6,9 +6,9 @@ import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
+import no.ntnu.oskarlothe.model.Day;
 import no.ntnu.oskarlothe.model.Task;
 import no.ntnu.oskarlothe.model.User;
-import no.ntnu.oskarlothe.model.period.Day;
 
 /**
  * JUnit testing for the AddTaskCommand class.
@@ -34,6 +34,6 @@ public class AddTaskCommandTest {
         
         command.execute();
 
-        assertTrue(day.getTaskList().contains(task));
+        assertTrue(day.contains(task));
     }
 }

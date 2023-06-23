@@ -7,8 +7,6 @@ import java.time.LocalDate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import no.ntnu.oskarlothe.model.period.Day;
-
 /**
  * JUnit testing for the DayNavigator class.
  * 
@@ -41,8 +39,8 @@ public class DayNavigatorTest {
         Task task1 = new Task("Walk the dog", "The dog needs to pee", creator);
         Task task2 = new Task("Clean the house", "The house is really messy!", creator);
 
-        day1.getTaskList().add(task1);
-        day2.getTaskList().add(task2);
+        day1.add(task1);
+        day2.add(task2);
 
         schedule.getDayList().add(day1);
         schedule.getDayList().add(day2);

@@ -8,8 +8,6 @@ import java.time.LocalDate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import no.ntnu.oskarlothe.model.period.Day;
-
 /**
  * JUnit testing for the DayGenerator class.
  * 
@@ -78,22 +76,22 @@ public class DayGeneratorTest {
         assertTrue(day2.getDate().equals(dayDate));
 
         // checks that the day contains repeatingtask 1
-        assertTrue(day2.getTaskList().contains(repeater1));
+        assertTrue(day2.contains(repeater1));
 
         // checks that the day does not contain repeatingtask 2
-        assertFalse(day2.getTaskList().contains(repeater2));
+        assertFalse(day2.contains(repeater2));
 
         // checks that the day contains task1
-        assertTrue(day2.getTaskList().contains(task1));
+        assertTrue(day2.contains(task1));
 
         // checks that the day contains task2
-        assertTrue(day2.getTaskList().contains(task2));
+        assertTrue(day2.contains(task2));
 
         // making sure a change to the new day does not change the original day
-        day2.getTaskList().remove(task1);
+        day2.remove(task1);
 
         // day 1 should still hold task1, since we only removed it from day2
-        assertTrue(day1.getTaskList().contains(task1));
+        assertTrue(day1.contains(task1));
     }
 
     /**
@@ -107,14 +105,14 @@ public class DayGeneratorTest {
         Day day2 = DayGenerator.generate(newDate, dayList, repeaters);
 
         // checks that day2 contains the proper repeating task
-        assertTrue(day2.getTaskList().contains(repeater2));
+        assertTrue(day2.contains(repeater2));
 
         // checks that day2 does not contain the wrong repeating task
-        assertFalse(day2.getTaskList().contains(repeater1));
+        assertFalse(day2.contains(repeater1));
 
         // checks that day 2 does not contain any of the tasks from day1, since the date is different
-        assertFalse(day2.getTaskList().contains(task1));
+        assertFalse(day2.contains(task1));
 
-        assertFalse(day2.getTaskList().contains(task2));
+        assertFalse(day2.contains(task2));
     }
 }

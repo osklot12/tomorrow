@@ -1,7 +1,6 @@
 package no.ntnu.oskarlothe.model.command;
 
-import no.ntnu.oskarlothe.model.period.Period;
-
+import no.ntnu.oskarlothe.model.Period;
 import no.ntnu.oskarlothe.model.Task;
 
 /**
