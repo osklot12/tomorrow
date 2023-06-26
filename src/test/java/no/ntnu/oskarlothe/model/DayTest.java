@@ -50,10 +50,9 @@ public class DayTest {
     void testGenerateReport() {
         LocalDate date = LocalDate.now();
         User user = new User("John", "Johnson");
-        LocalDateTime timestamp = LocalDateTime.now();
         Day day = new Day(date);
 
-        Report report = day.generateReport(user, timestamp);
+        Report report = day.generateReport(user);
 
         // since the TaskList returned by the report is a copy of the original TaskList,
         // they should be equal at this moment

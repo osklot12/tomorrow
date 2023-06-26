@@ -1,7 +1,6 @@
 package no.ntnu.oskarlothe.model;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 import no.ntnu.oskarlothe.model.regionstrategy.RegionStrategy;
 
@@ -57,8 +56,8 @@ public class Day extends TaskList implements Period {
     }
 
     @Override
-    public Report generateReport(User creator, LocalDateTime generatedAt) {
-        return new Report(creator, generatedAt, this.clone());
+    public Report generateReport(User creator) {
+        return new Report(creator, this.clone());
     }
 
     @Override

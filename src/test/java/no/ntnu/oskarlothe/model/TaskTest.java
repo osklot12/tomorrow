@@ -1,6 +1,7 @@
 package no.ntnu.oskarlothe.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -57,9 +58,87 @@ public class TaskTest {
         User creator = new User("The Creator", "Himself", "Developer");
         Task task1 = new Task("TestHeader", "Some content", creator);
         Task task2 = new Task("Testheader", "Some other content", creator);
-        
+
         boolean matching = task1.matchHeader(task2);
 
         assertTrue(matching);
+    }
+
+    /**
+     * Tests that the assign() method returns true is a user is successfully
+     * assigned to the task.
+     */
+    @Test
+    void testAssignTrue() {
+        User creator = new User("John", "Johnson");
+
+        Task task = new Task("Do the dishes", "Time to do the dishes now!", creator);
+
+        User user = new User("Mark", "SuckerBerg");
+
+        boolean assigned = task.assign(user);
+
+        assertTrue(assigned);
+
+        assertTrue(task.getStatus().getAssignees().contains(user));
+    }
+
+    /**
+     * Tests that the assign() method returns false if a user already exists as an
+     * assignee, and that the method does not assign the user.
+     */
+    @Test
+    void testAssignFalse() {
+        User creator = new User("John", "Johnson");
+
+        Task task = new Task("Do the dishes", "Time to do the dishes now!", creator);
+
+        User user = new User("Mark", "SuckerBerg");
+
+        task.assign(user);
+
+        boolean assigned = task.assign(user);
+
+        assertFalse(assigned);
+
+        assertTrue(task.getStatus().getAssignees().size() == 1);
+    }
+
+    /**
+     * Tests that the unassign() method returns true is a user is successfully
+     * unassigned.
+     */
+    @Test
+    void testUnassignTrue() {
+        User creator = new User("John", "Johnson");
+
+        Task task = new Task("Do the dishes", "Time to do the dishes now!", creator);
+
+        User user = new User("Mark", "SuckerBerg");
+
+        task.assign(user);
+
+        boolean unassigned = task.unassign(user);
+
+        assertTrue(unassigned);
+
+        assertFalse(task.getStatus().getAssignees().contains(user));
+    }
+
+    /**
+     * Tests that the unassign() method returns false if a user is not unassigned,
+     * due to the user not existing as an assignee.
+     */
+    @Test
+    void testUnassignFalse() {
+        User creator = new User("John", "Johnson");
+
+        Task task = new Task("Do the dishes", "Time to do the dishes now!", creator);
+
+        User user = new User("Mark", "SuckerBerg");
+
+        boolean unassigned = task.unassign(user);
+
+        assertFalse(unassigned);
     }
 }

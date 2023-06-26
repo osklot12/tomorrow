@@ -87,6 +87,45 @@ public class Task {
     }
 
     /**
+     * Assigns a user to the task.
+     * 
+     * @param user the user to assign
+     * @return true if successfully assigned, false if user already is assigned
+     */
+    public boolean assign(User user) {
+        if (user == null) {
+            throw new IllegalArgumentException("Cannot assign user to task, because user is null.");
+        }
+
+        if (!this.status.getAssignees().contains(user)) {
+            this.status.assign(user);
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Unassigns a user from the task.
+     * 
+     * @param user user to unassign
+     * @return true is successfully unassigned, false if user does not exist as
+     *         assignee
+     */
+    public boolean unassign(User user) {
+        if (user == null) {
+            throw new IllegalArgumentException("Cannot unassign user from task, because user is null.");
+        }
+
+        if (this.status.getAssignees().contains(user)) {
+            this.status.unassign(user);
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * Returns the TaskStatus of the task.
      * 
      * @return TaskStatus object

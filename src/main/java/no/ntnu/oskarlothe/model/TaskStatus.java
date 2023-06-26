@@ -23,7 +23,7 @@ import no.ntnu.oskarlothe.model.exception.UserAlreadyExistsException;
  * @version 1.0-SNAPSHOT
  */
 public class TaskStatus {
-    private List<User> assignees;
+    private UserList assignees;
 
     private User completer;
 
@@ -31,7 +31,7 @@ public class TaskStatus {
      * Constructor for the TaskStatus class.
      */
     public TaskStatus() {
-        this.assignees = new ArrayList<>();
+        this.assignees = new UserList();
         this.completer = null;
     }
 
@@ -45,7 +45,7 @@ public class TaskStatus {
             throw new IllegalArgumentException("Assignees cannot be null");
         }
 
-        this.assignees = assignees;
+        this.assignees = new UserList(assignees);
         this.completer = null;
     }
 
@@ -118,7 +118,7 @@ public class TaskStatus {
      * 
      * @return list of users assigned to the task
      */
-    public List<User> getAssignees() {
+    public UserList getAssignees() {
         return this.assignees;
     }
 

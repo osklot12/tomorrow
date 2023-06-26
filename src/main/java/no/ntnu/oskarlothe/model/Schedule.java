@@ -53,4 +53,39 @@ public class Schedule {
     public TaskList getRepeatingTasks() {
         return this.repeatingTasks;
     }
+
+    /**
+     * Returns all tasks from the list of days.
+     * 
+     * @return all tasks from the individual days
+     */
+    public TaskList getAllDayTasks() {
+        TaskList result = new TaskList();
+
+        this.days.forEach(
+            (day) -> {
+                day.forEach(
+                    (task) -> {
+                        result.add(task);
+                    }
+                );
+            }
+        );
+
+        return result;
+    }
+
+    /**
+     * Returns a list of all the tasks in the schedule; both tasks from the days and
+     * the repeating tasks.
+     * 
+     * @return TaskList object containing all tasks
+     */
+    public TaskList getAllTasks() {
+        TaskList result = this.getAllDayTasks().clone();
+
+        result.addAll(this.repeatingTasks);
+
+        return result;
+    }
 }

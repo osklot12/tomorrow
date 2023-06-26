@@ -1,6 +1,7 @@
 package no.ntnu.oskarlothe.model;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 /**
  * A class representing a report for a spesific period of time.
@@ -30,13 +31,9 @@ public class Report {
      * @param generatedAt the time at which the report was generated
      * @param taskList      the period of time to report
      */
-    public Report(User creator, LocalDateTime generatedAt, TaskList taskList) {
+    public Report(User creator, TaskList taskList) {
         if (creator == null) {
             throw new IllegalArgumentException("Creator cannot be null.");
-        }
-
-        if (generatedAt == null) {
-            throw new IllegalArgumentException("GeneratedAt cannot be null.");
         }
 
         if (taskList == null) {
@@ -44,7 +41,7 @@ public class Report {
         }
 
         this.creator = creator;
-        this.generatedAt = generatedAt;
+        this.generatedAt = LocalDateTime.now();
         this.taskList = taskList;
     }
 
