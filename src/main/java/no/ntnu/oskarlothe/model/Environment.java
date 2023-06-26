@@ -2,20 +2,18 @@ package no.ntnu.oskarlothe.model;
 
 /**
  * A class representing an Environment in the application.
- * An environment consist of a list of users, as well as a schedule, and manages
- * their relations.
- * Environments allows for abstracting a group of people signed to a group of
- * tasks.
- * Giving the environment a name makes it easier for the user to recognize
- * different environments and switch between them.
+ * The Environment class is responsible for managing the schedule and users as
+ * well as actions related to the two.
  * 
  * @author Oskar Lothe
  * @version 1.0-SNAPSHOT
  */
-public abstract class Environment {
+public class Environment {
     private String name;
 
     private Schedule schedule;
+
+    private UserList users;
 
     /**
      * Constructor for the Environment class.
@@ -23,7 +21,7 @@ public abstract class Environment {
      * @param name     the name of the environment
      * @param schedule the schedule of the enviroment
      */
-    public Environment(String name, Schedule schedule) {
+    public Environment(String name, Schedule schedule, UserList users) {
         if (name == null || name.isBlank()) {
             throw new IllegalArgumentException("Name of the environment must be defined.");
         }
@@ -32,8 +30,13 @@ public abstract class Environment {
             throw new IllegalArgumentException("Schedule of the environment must be defined.");
         }
 
+        if (users == null) {
+            throw new IllegalArgumentException("Cannot create environment, because UserList is null.");
+        }
+
         this.name = name;
         this.schedule = schedule;
+        this.users = users;
     }
 
     /**
@@ -55,11 +58,20 @@ public abstract class Environment {
     }
 
     /**
-     * Transforms the environment into another type of environment.
-     * The method uses a transformator to transform the environment.
+     * Returns the users of the Environment.
      * 
-     * @param transformator the transformator to use for the transformation
-     * @return the new transformed environment
+     * @return UserList of environment
      */
-    abstract Environment transform(TransformStrategy transformator);
+    public UserList getUsers() {
+        return this.users;
+    }
+
+    /**
+     * Returns a new ScheduleCleaner object for the schedule of the environment.
+     * 
+     * @return new ScheduleCleaner object
+     */
+    public ScheduleCleaner createScheduleCleaner() {
+        return new ScheduleCleaner(this.schedule);
+    }
 }
