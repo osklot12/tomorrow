@@ -1,7 +1,5 @@
 package no.ntnu.oskarlothe.model;
 
-import java.time.LocalDateTime;
-
 import no.ntnu.oskarlothe.model.regionstrategy.RegionStrategy;
 
 /**
@@ -27,12 +25,4 @@ public interface Period {
      * @return a string describing the period
      */
     String getPeriodAsString(RegionStrategy region);
-
-    /**
-     * Adds a task object to the Period.
-     * 
-     * @param task the task to add
-     * @return true if task is added, false if not
-     */
-    boolean add(Task task);
 }

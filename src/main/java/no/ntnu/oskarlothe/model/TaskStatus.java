@@ -1,10 +1,10 @@
 package no.ntnu.oskarlothe.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import no.ntnu.oskarlothe.model.exception.NoSuchUserException;
 import no.ntnu.oskarlothe.model.exception.TaskAlreadyCompletedException;
+import no.ntnu.oskarlothe.model.exception.TaskNotCompletedException;
 import no.ntnu.oskarlothe.model.exception.UserAlreadyExistsException;
 
 /**
@@ -111,6 +111,17 @@ public class TaskStatus {
         }
 
         this.completer = user;
+    }
+
+    /**
+     * Removes the completer of the task status, making is not done yet.
+     */
+    public void abandon() {
+        if (!this.isDone()) {
+            throw new TaskNotCompletedException("Cannot abandon task, because task is not completed yet.");
+        }
+
+        this.completer = null;
     }
 
     /**

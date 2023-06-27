@@ -12,7 +12,7 @@ package no.ntnu.oskarlothe.model;
  * @author Oskar Lothe
  * @version 1.0-SNAPSHOT
  */
-public class Task {
+public class Task implements Doable {
     private TaskStatus status;
 
     private String header;
@@ -162,11 +162,33 @@ public class Task {
     }
 
     /**
+     * Does the task, and assignes the user as the completer.
+     * 
+     * @param user the completer of the task
+     */
+    public void doTask(User user) {
+        this.status.complete(user);
+    }
+
+    /**
+     * Undoes the task, and removes the completer of the task.
+     */
+    public void unDo() {
+        this.status.abandon();
+    }
+
+    @Override
+    public boolean isDone() {
+        return this.status.isDone();
+    }
+
+    /**
      * Returns a copy of the Task.
      * 
      * @return copy of Task object
      */
-    public Task copy() {
+    @Override
+    public Task clone() {
         return new Task(new TaskStatus(this.status.getAssignees()), this.header, this.content, this.creator);
     }
 

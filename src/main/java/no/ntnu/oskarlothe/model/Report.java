@@ -1,7 +1,6 @@
 package no.ntnu.oskarlothe.model;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 /**
  * A class representing a report for a spesific period of time.
