@@ -1,13 +1,19 @@
 package no.ntnu.oskarlothe.model;
 
+import no.ntnu.oskarlothe.model.notification.ChangedTaskHeaderNotification;
+import no.ntnu.oskarlothe.model.notification.TaskCompletedNotification;
+
 /**
  * A class representing a task to be done.
  * The Task object is the core part of the application, and is the super class
  * of all other task classes.
- * <br/>
- * <br/>
  * 
- * Wheter a task is done or not is represented by a Status object.
+ * <p>
+ * Users assigned to a task will also be subscribed to notifications for that
+ * task.
+ * Unwanted subscription of a task can be achieved by simply unsubscribing to
+ * that task.
+ * <p/>
  * 
  * @author Oskar Lothe
  * @version 1.0-SNAPSHOT
@@ -20,6 +26,8 @@ public class Task implements Doable {
     private String content;
 
     private User creator;
+
+    private TaskNotifier notifier;
 
     /**
      * Constructor for the Task class.
@@ -44,6 +52,7 @@ public class Task implements Doable {
         this.header = header;
         this.content = content;
         this.creator = creator;
+        this.notifier = new TaskNotifier();
     }
 
     /**
@@ -88,6 +97,8 @@ public class Task implements Doable {
 
     /**
      * Assigns a user to the task.
+     * Any user assigned to a task will also be subscribed to notifications for the
+     * task.
      * 
      * @param user the user to assign
      * @return true if successfully assigned, false if user already is assigned
@@ -99,6 +110,11 @@ public class Task implements Doable {
 
         if (!this.status.getAssignees().contains(user)) {
             this.status.assign(user);
+
+            if (!this.notifier.hasSubscriber(user)) {
+                this.notifier.subscribe(user);
+            }
+
             return true;
         }
 
@@ -119,6 +135,11 @@ public class Task implements Doable {
 
         if (this.status.getAssignees().contains(user)) {
             this.status.unassign(user);
+
+            if (this.notifier.hasSubscriber(user)) {
+                this.notifier.unsubscribe(user);
+            }
+
             return true;
         }
 
@@ -162,12 +183,22 @@ public class Task implements Doable {
     }
 
     /**
-     * Does the task, and assignes the user as the completer.
+     * Returns the notifier of the task.
+     * 
+     * @return TaskNotifier object
+     */
+    public TaskNotifier getNotifier() {
+        return this.notifier;
+    }
+
+    /**
+     * Does the task.
      * 
      * @param user the completer of the task
      */
     public void doTask(User user) {
         this.status.complete(user);
+        this.notifier.sendNotification(new TaskCompletedNotification(this, user));
     }
 
     /**
@@ -175,6 +206,34 @@ public class Task implements Doable {
      */
     public void unDo() {
         this.status.abandon();
+    }
+
+    /**
+     * Sets the header of the task.
+     * 
+     * @param header new header to set
+     */
+    public void setHeader(String header) {
+        if (header == null || header.isBlank()) {
+            throw new IllegalArgumentException("Cannot set header, because header is not defined.");
+        }
+
+        String oldHeader = this.header;
+        this.header = header;
+        this.notifier.sendNotification(new ChangedTaskHeaderNotification(this, oldHeader, this.header));
+    }
+
+    /**
+     * Sets the content of the task.
+     * 
+     * @param content new content of task
+     */
+    public void setContent(String content) {
+        if (content == null) {
+            throw new IllegalArgumentException("Cannot set content, because content is null.");
+        }
+
+        this.content = content;
     }
 
     @Override

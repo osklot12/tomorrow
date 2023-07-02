@@ -1,5 +1,7 @@
 package no.ntnu.oskarlothe.model;
 
+import no.ntnu.oskarlothe.model.notification.NotificationCenter;
+
 /**
  * A class representing a user of the application.
  * Having users is essential in the situation of 'enviroments', where tasks is
@@ -22,6 +24,8 @@ public class User {
 
     private String nickname;
 
+    private NotificationCenter notifications;
+
     /**
      * Constructor for users without a nickname.
      * 
@@ -40,6 +44,7 @@ public class User {
         this.firstName = firstName;
         this.lastName = lastName;
         this.nickname = "";
+        this.notifications = new NotificationCenter();
     }
 
     /**
@@ -93,6 +98,29 @@ public class User {
      */
     public String getNickname() {
         return this.nickname;
+    }
+
+    /**
+     * Returns the notification center for the user.
+     * 
+     * @return notification center for user
+     */
+    public NotificationCenter getNotifications() {
+        return this.notifications;
+    }
+
+    /**
+     * Returns a string representation of the user.
+     * Returns the nickname if any, or full name if no nickname is set.
+     * 
+     * @return a string representation of the user
+     */
+    public String getStringRepresentation() {
+        if (!this.nickname.isBlank()) {
+            return this.nickname;
+        }
+
+        return this.firstName + " " + this.lastName;
     }
 
     @Override

@@ -88,4 +88,46 @@ public class Schedule {
 
         return result;
     }
+
+    /**
+     * Adds a task for a spesific date.
+     * 
+     * @param task task to add
+     * @param date the date to add to
+     * @return true if added successfully, false if not
+     */
+    public boolean addTaskForDate(Task task, LocalDate date) {
+        return this.getDay(date).add(task);
+    }
+
+    /**
+     * Removes a task from a spesific date.
+     * 
+     * @param task task to remove
+     * @param date date to remove task from
+     * @return true if removed successfully, false if not
+     */
+    public boolean removeTaskForDate(Task task, LocalDate date) {
+        return this.getDay(date).remove(task);
+    }
+
+    /**
+     * Adds a repeating task to the schedule.
+     * 
+     * @param task the task to add
+     * @return true if successfully added, false if not
+     */
+    public boolean addRepeatingTask(RepeatingTask task) {
+        return this.getRepeatingTasks().add(task);
+    }
+
+    /**
+     * Removes a repeating task from the schedule.
+     * 
+     * @param task repeating task to remove
+     * @return true is successfully removed, false if not
+     */
+    public boolean removeRepeatingTask(RepeatingTask task) {
+        return this.getRepeatingTasks().remove(task);
+    }
 }

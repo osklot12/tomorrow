@@ -13,8 +13,9 @@ package no.ntnu.oskarlothe.model;
  * <p/>
  * 
  * <p>
- * The Environment class also holds news with data for individual users, making
- * each user have their personalized news section.
+ * The Environment class also holds notifications with data for individual
+ * users, making
+ * each user have their personalized notification section.
  * <p/>
  * 
  * @author Oskar Lothe
@@ -35,7 +36,7 @@ public class Environment {
      * @param name     the name of the environment
      * @param schedule the schedule of the enviroment
      */
-    public Environment(String name, Schedule schedule, UserList users, User user) {
+    public Environment(String name, Schedule schedule, UserList users) {
         if (name == null || name.isBlank()) {
             throw new IllegalArgumentException("Name of the environment must be defined.");
         }
@@ -48,14 +49,10 @@ public class Environment {
             throw new IllegalArgumentException("Cannot create environment, because UserList is null.");
         }
 
-        if (user == null) {
-            throw new IllegalArgumentException("Cannot create environment, because user is null.");
-        }
-
         this.name = name;
         this.schedule = schedule;
         this.users = users;
-        this.user = user;
+        this.user = null;
     }
 
     /**
@@ -96,7 +93,7 @@ public class Environment {
 
     /**
      * Sets the user of the environment.
-     * Can only set to a user that does exist in the environment.
+     * Can only set to a user that already exists in the environment.
      * 
      * @param user user to set
      */
@@ -113,7 +110,7 @@ public class Environment {
     }
 
     /**
-     * Returns the user using the environment at the moment.
+     * Returns the user using the environment.
      * 
      * @return user of environment
      */
