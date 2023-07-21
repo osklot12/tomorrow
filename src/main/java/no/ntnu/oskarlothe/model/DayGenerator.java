@@ -26,6 +26,7 @@ public class DayGenerator {
         }
 
         Day day = days.getForDate(date);
+        
         if (day == null) {
             day = new Day(date);
         } else {

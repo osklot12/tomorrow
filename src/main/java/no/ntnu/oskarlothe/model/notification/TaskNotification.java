@@ -7,6 +7,9 @@ import no.ntnu.oskarlothe.model.User;
 
 /**
  * A class representing a notification about a spesific task.
+ * A TaskNotification object holds information about spesific changes or events
+ * related to a task for a spesific day.
+ * 
  * 
  * @author Oskar Lothe
  * @version 1.0-SNAPSHOT

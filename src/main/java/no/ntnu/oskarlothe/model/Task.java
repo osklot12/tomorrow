@@ -29,6 +29,8 @@ public class Task implements Doable {
 
     private TaskNotifier notifier;
 
+    private Category category;
+
     /**
      * Constructor for the Task class.
      * <br/>
@@ -53,6 +55,7 @@ public class Task implements Doable {
         this.content = content;
         this.creator = creator;
         this.notifier = new TaskNotifier();
+        this.category = null;
     }
 
     /**
@@ -198,7 +201,7 @@ public class Task implements Doable {
      */
     public void doTask(User user) {
         this.status.complete(user);
-        this.notifier.sendNotification(new TaskCompletedNotification(this, user));
+        this.notifier.sendTaskCompletedNotification(this);
     }
 
     /**
@@ -234,6 +237,24 @@ public class Task implements Doable {
         }
 
         this.content = content;
+    }
+
+    /**
+     * Sets the category of the task.
+     * 
+     * @param category category to set
+     */
+    public void setCategory(Category category) {
+        if (!(this.category.equals(category))) {
+            this.category = category;
+        }
+    }
+
+    /**
+     * Returns the category of the task.
+     */
+    public Category getCategory() {
+        return this.category;
     }
 
     @Override

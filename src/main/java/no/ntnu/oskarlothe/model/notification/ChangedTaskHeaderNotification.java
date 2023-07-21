@@ -3,7 +3,7 @@ package no.ntnu.oskarlothe.model.notification;
 import no.ntnu.oskarlothe.model.Task;
 
 /**
- * A class representing a notification for a change in the title for a task.
+ * A class representing a notification for a change in the title of a task.
  * 
  * @author Oskar Lothe
  * @version 1.0-SNAPSHOT

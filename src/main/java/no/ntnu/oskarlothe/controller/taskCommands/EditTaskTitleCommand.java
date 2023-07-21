@@ -1,11 +1,12 @@
-package no.ntnu.oskarlothe.controller.TaskCommand;
+package no.ntnu.oskarlothe.controller.taskCommands;
 
+import no.ntnu.oskarlothe.controller.Command;
 import no.ntnu.oskarlothe.model.Task;
 
 /**
  * A class representing a command for changing the title of a task.
  */
-public class EditTaskTitleCommand implements TaskCommand {
+public class EditTaskTitleCommand implements Command {
     private Task task;
 
     private String newTitle;

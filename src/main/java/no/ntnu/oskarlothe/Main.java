@@ -7,7 +7,12 @@ package no.ntnu.oskarlothe;
  * @version 1.0-SNAPSHOT
  */
 public class Main {
+    /**
+     * Launches the whole application.
+     * 
+     * @param args console arguments
+     */
     public static void main(String[] args) {
-        
+        App.main(args);
     }
 }

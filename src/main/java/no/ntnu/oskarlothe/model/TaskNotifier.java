@@ -1,17 +1,18 @@
 package no.ntnu.oskarlothe.model;
 
+import no.ntnu.oskarlothe.model.notification.ChangedTaskHeaderNotification;
 import no.ntnu.oskarlothe.model.notification.Notification;
+import no.ntnu.oskarlothe.model.notification.TaskCompletedNotification;
 
 /**
- * A class acting as a basic publisher in the observer pattern, notifying all
+ * A class acting as a basic publisher using the observer pattern, notifying all
  * the subscribers about some event. The class also has behaviour for
- * subscribing and unsubscribing to the
- * subject.
+ * subscribing and unsubscribing to the subject.
  * 
  * @author Oskar Lothe
  * @version 1.0-SNAPSHOT
  */
-public class TaskNotifier {
+public class TaskNotifier implements Notifier {
     private UserList subscribers;
 
     /**
@@ -41,7 +42,7 @@ public class TaskNotifier {
     }
 
     /**
-     * Subscribes a user to the notifier object.
+     * Subscribes a user to the notifying object.
      * 
      * @param user the user to subscribe
      * @return true if successfully subscribed, false if not
@@ -51,7 +52,7 @@ public class TaskNotifier {
     }
 
     /**
-     * Unsubscribes a user from the notifier.
+     * Unsubscribes a user from the notifying object.
      * 
      * @param user the user to unsubscribe
      * @return true if successfully unsubscribed, false if not
@@ -70,5 +71,40 @@ public class TaskNotifier {
                 (subscriber) -> {
                     subscriber.getNotifications().add(notification);
                 });
+    }
+
+    /**
+     * Creates a new TaskCompletedNotification and sends it to all the subscribed
+     * users of the
+     * task.
+     * 
+     * @param task the task which is completed
+     */
+    public void sendTaskCompletedNotification(Task task) {
+        if (task == null) {
+            throw new IllegalArgumentException("Cannot send TaskCompletedNotification, because task is null.");
+        }
+
+        Notification taskCompletedNotification = new TaskCompletedNotification(task, task.getStatus().getCompleter());
+
+        this.sendNotification(taskCompletedNotification);
+    }
+
+    /**
+     * Creates a new ChangedTaskHeaderNotification and sends it to all the
+     * subscribed users of the task.
+     * 
+     * @param task      the task that had a change to its header
+     * @param oldHeader the old header of the task
+     */
+    public void sendChangedTaskHeaderNotification(Task task, String oldHeader) {
+        if (task == null) {
+            throw new IllegalArgumentException("Cannot send ChangedTaskHeaderNotification, because task is null.");
+        }
+
+        Notification changedTaskHeaderNotification = new ChangedTaskHeaderNotification(task, oldHeader,
+                task.getHeader());
+
+        this.sendNotification(changedTaskHeaderNotification);
     }
 }

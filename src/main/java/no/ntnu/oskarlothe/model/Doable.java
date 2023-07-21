@@ -14,4 +14,11 @@ public interface Doable {
      * @return true if done, false if not
      */
     boolean isDone();
+
+    /**
+     * Returns the category of the doable.
+     * 
+     * @return category object
+     */
+    Category getCategory();
 }
