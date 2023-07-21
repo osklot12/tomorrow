@@ -1,6 +1,6 @@
 # Tomorrow
 ## Live in the present by planning tomorrow
-Tomorrow is a productivity tool with a goal of making your tomorrow easier.
+Tomorrow is a productivity tool that aims at reducing your everyday planning, minimizing the effort put to planning. Having a schedule for task also helps the user get an overview of his or her life in a way.
 With busy weekdays and alot of things to do, it can be hard to keep track of everything in your life, and tomorrow wishes to be your solution to this. Track your task progress for the day, week, month or year.
 <br/>
 
