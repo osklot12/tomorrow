@@ -34,7 +34,7 @@ public class DayGenerator {
         }
 
         for (RepeatingTask repeater : repeaters.getRepeatingTasksForDate(date)) {
-            day.add(repeater.clone());
+            day.add(repeater.getInstance());
         }
 
         return day;

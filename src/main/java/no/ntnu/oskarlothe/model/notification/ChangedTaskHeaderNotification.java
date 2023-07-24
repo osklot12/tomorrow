@@ -1,5 +1,6 @@
 package no.ntnu.oskarlothe.model.notification;
 
+import no.ntnu.oskarlothe.model.Assignment;
 import no.ntnu.oskarlothe.model.Task;
 
 /**
@@ -20,8 +21,8 @@ public class ChangedTaskHeaderNotification extends TaskNotification {
      * @param oldTitle the old title of the task
      * @param newTitle the new title of the task
      */
-    public ChangedTaskHeaderNotification(Task task, String oldTitle, String newTitle) {
-        super(task);
+    public ChangedTaskHeaderNotification(Assignment assignment, String oldTitle, String newTitle) {
+        super(assignment);
 
         if (oldTitle == null || oldTitle.isBlank()) {
             throw new IllegalArgumentException(

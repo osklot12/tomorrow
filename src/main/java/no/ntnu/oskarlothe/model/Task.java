@@ -1,152 +1,41 @@
 package no.ntnu.oskarlothe.model;
 
-import no.ntnu.oskarlothe.model.notification.ChangedTaskHeaderNotification;
-import no.ntnu.oskarlothe.model.notification.TaskCompletedNotification;
-
 /**
  * A class representing a task to be done.
- * The Task object is the core part of the application, and is the super class
- * of all other task classes.
- * 
- * <p>
- * Users assigned to a task will also be subscribed to notifications for that
- * task.
- * Unwanted subscription of a task can be achieved by simply unsubscribing to
- * that task.
- * <p/>
+ * The Task class extends from the Assignment class and puts a status on top.
+ * The TaskStatus holds data relevant to the Assignments' progress.
  * 
  * @author Oskar Lothe
  * @version 1.0-SNAPSHOT
  */
-public class Task implements Doable {
+public class Task extends Assignment implements Doable {
     private TaskStatus status;
 
-    private String header;
-
-    private String content;
-
-    private User creator;
-
-    private TaskNotifier notifier;
-
-    private Category category;
-
     /**
      * Constructor for the Task class.
-     * <br/>
-     * <br/>
-     * The header and creator of a Task must be defined.
      * 
-     * @param header  the header of the task
-     * @param content the descriptive text of the task
-     * @param creator the user that created the task
+     * @param header the header of the task
+     * @param content the content of the task
+     * @param creator the creator of the task
      */
     public Task(String header, String content, User creator) {
-        if (header == null || header.isBlank()) {
-            throw new IllegalArgumentException("Task header must be defined.");
-        }
-
-        if (creator == null) {
-            throw new IllegalArgumentException("Creator of task must be defined.");
-        }
+        super(header, content, creator);
 
         this.status = new TaskStatus();
-        this.header = header;
-        this.content = content;
-        this.creator = creator;
-        this.notifier = new TaskNotifier();
-        this.category = null;
     }
 
     /**
-     * Constructor for the Task class.
-     * <br/>
-     * <br/>
-     * The header and creator of a Task must be defined.
+     * Constructor for the Task class, allowing for a premade status.
      * 
-     * @param header  the header of the task
-     * @param content the descriptive text of the task
-     * @param creator the user that created the task
+     * @param status the status of the task
+     * @param header the header of the task
+     * @param content the content of the task
+     * @param creator the creator of the task
      */
     public Task(TaskStatus status, String header, String content, User creator) {
-        if (status == null) {
-            throw new IllegalArgumentException("TaskStatus cannot be null.");
-        }
-
-        if (header == null || header.isBlank()) {
-            throw new IllegalArgumentException("Task header must be defined.");
-        }
-
-        if (creator == null) {
-            throw new IllegalArgumentException("Creator of task must be defined.");
-        }
+        super(header, content, creator);
 
         this.status = status;
-        this.header = header;
-        this.content = content;
-        this.creator = creator;
-    }
-
-    /**
-     * Checks if the task header matches the header of another task.
-     * Ignores uppercase.
-     * 
-     * @param task the task to compare
-     * @return true if header matches, false if not
-     */
-    public boolean matchHeader(Task task) {
-        return this.header.toLowerCase().equals(task.getHeader().toLowerCase());
-    }
-
-    /**
-     * Assigns a user to the task.
-     * Any user assigned to a task will also be subscribed to notifications for the
-     * task.
-     * 
-     * @param user the user to assign
-     * @return true if successfully assigned, false if user already is assigned
-     */
-    public boolean assign(User user) {
-        if (user == null) {
-            throw new IllegalArgumentException("Cannot assign user to task, because user is null.");
-        }
-
-        if (!this.status.getAssignees().contains(user)) {
-            this.status.assign(user);
-
-            if (!this.notifier.hasSubscriber(user)) {
-                this.notifier.subscribe(user);
-            }
-
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * Unassigns a user from the task.
-     * 
-     * @param user user to unassign
-     * @return true is successfully unassigned, false if user does not exist as
-     *         assignee
-     */
-    public boolean unassign(User user) {
-        if (user == null) {
-            throw new IllegalArgumentException("Cannot unassign user from task, because user is null.");
-        }
-
-        if (this.status.getAssignees().contains(user)) {
-            this.status.unassign(user);
-
-            if (this.notifier.hasSubscriber(user)) {
-                this.notifier.unsubscribe(user);
-            }
-
-            return true;
-        }
-
-        return false;
     }
 
     /**
@@ -159,49 +48,12 @@ public class Task implements Doable {
     }
 
     /**
-     * Returns the header of the task.
-     * 
-     * @return header of task
-     */
-    public String getHeader() {
-        return this.header;
-    }
-
-    /**
-     * Returns the content of the task.
-     * 
-     * @return content of task
-     */
-    public String getContent() {
-        return this.content;
-    }
-
-    /**
-     * Returns the creator of the task.
-     * 
-     * @return creator of task
-     */
-    public User getCreator() {
-        return this.creator;
-    }
-
-    /**
-     * Returns the notifier of the task.
-     * 
-     * @return TaskNotifier object
-     */
-    public TaskNotifier getNotifier() {
-        return this.notifier;
-    }
-
-    /**
      * Does the task.
      * 
-     * @param user the completer of the task
+     * @param user the user which completed the task
      */
     public void doTask(User user) {
         this.status.complete(user);
-        this.notifier.sendTaskCompletedNotification(this);
     }
 
     /**
@@ -209,52 +61,6 @@ public class Task implements Doable {
      */
     public void unDo() {
         this.status.abandon();
-    }
-
-    /**
-     * Sets the header of the task.
-     * 
-     * @param header new header to set
-     */
-    public void setHeader(String header) {
-        if (header == null || header.isBlank()) {
-            throw new IllegalArgumentException("Cannot set header, because header is not defined.");
-        }
-
-        String oldHeader = this.header;
-        this.header = header;
-        this.notifier.sendNotification(new ChangedTaskHeaderNotification(this, oldHeader, this.header));
-    }
-
-    /**
-     * Sets the content of the task.
-     * 
-     * @param content new content of task
-     */
-    public void setContent(String content) {
-        if (content == null) {
-            throw new IllegalArgumentException("Cannot set content, because content is null.");
-        }
-
-        this.content = content;
-    }
-
-    /**
-     * Sets the category of the task.
-     * 
-     * @param category category to set
-     */
-    public void setCategory(Category category) {
-        if (!(this.category.equals(category))) {
-            this.category = category;
-        }
-    }
-
-    /**
-     * Returns the category of the task.
-     */
-    public Category getCategory() {
-        return this.category;
     }
 
     @Override
@@ -269,15 +75,13 @@ public class Task implements Doable {
      */
     @Override
     public Task clone() {
-        return new Task(new TaskStatus(this.status.getAssignees()), this.header, this.content, this.creator);
+        return new Task(new TaskStatus(this.status.getAssignees()), this.getHeader(), this.getContent(), this.getCreator());
     }
 
     @Override
     public int hashCode() {
-        int result = 17;
-        result = 31 * result + this.header.hashCode();
-        result = 31 * result + this.content.hashCode();
-        result = 31 * result + this.creator.hashCode();
+        int result = super.hashCode();
+        result = 31 * result + this.status.hashCode();
         return result;
     }
 
@@ -292,7 +96,6 @@ public class Task implements Doable {
         }
 
         Task task = (Task) o;
-        return this.header.equals(task.getHeader()) && this.content.equals(task.getContent())
-                && this.creator.equals(task.getCreator());
+        return this.getHeader().equals(task.getHeader()) && super.equals(o);
     }
 }

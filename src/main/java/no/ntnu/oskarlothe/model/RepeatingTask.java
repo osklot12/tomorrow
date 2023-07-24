@@ -7,7 +7,7 @@ package no.ntnu.oskarlothe.model;
  * @author Oskar Lothe
  * @version 1.0-SNAPSHOT
  */
-public class RepeatingTask extends Task {
+public class RepeatingTask extends Assignment {
     private Interval interval;
 
     /**
@@ -35,5 +35,19 @@ public class RepeatingTask extends Task {
      */
     public Interval getInterval() {
         return this.interval;
+    }
+
+    @Override
+    public RepeatingTask clone() {
+        return new RepeatingTask(this.getHeader(), this.getContent(), this.getCreator(), this.interval);
+    }
+
+    /**
+     * Returns a doable instance of the repeating task.
+     * 
+     * @return a doable instance
+     */
+    public RepeatingTaskInstance getInstance() {
+        return new RepeatingTaskInstance(this.getHeader(), this.getContent(), this.getCreator(), this);
     }
 }

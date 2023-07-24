@@ -46,7 +46,7 @@ public class TaskTest {
         Throwable exception = assertThrows(IllegalArgumentException.class,
                 () -> new Task(header, "", creator));
 
-        assertEquals("Task header must be defined.", exception.getMessage());
+        assertEquals("Assignment header must be defined.", exception.getMessage());
     }
 
     /**
@@ -80,7 +80,9 @@ public class TaskTest {
 
         assertTrue(assigned);
 
-        assertTrue(task.getStatus().getAssignees().contains(user));
+        boolean userAdded = task.getStatus().getAssignees().contains(user);
+
+        assertTrue(userAdded);
     }
 
     /**
