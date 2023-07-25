@@ -21,8 +21,8 @@ public class ChangedTaskHeaderNotification extends TaskNotification {
      * @param oldTitle the old title of the task
      * @param newTitle the new title of the task
      */
-    public ChangedTaskHeaderNotification(Assignment assignment, String oldTitle, String newTitle) {
-        super(assignment);
+    public ChangedTaskHeaderNotification(Task task, String oldTitle, String newTitle) {
+        super(task);
 
         if (oldTitle == null || oldTitle.isBlank()) {
             throw new IllegalArgumentException(

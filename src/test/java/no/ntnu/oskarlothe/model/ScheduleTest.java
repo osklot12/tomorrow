@@ -1,6 +1,5 @@
 package no.ntnu.oskarlothe.model;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
@@ -15,122 +14,101 @@ import org.junit.jupiter.api.Test;
  * @version 1.0-SNAPSHOT
  */
 public class ScheduleTest {
-    Schedule schedule;
+    LocalDate date1;
+
+    LocalDate date2;
+
+    LocalDate date3;
 
     Task task1;
 
     Task task2;
 
-    Task task3;
-
     RepeatingTask repeater1;
 
     RepeatingTask repeater2;
 
-    /**
-     * Setting up for the following test methods.
-     */
+    Schedule schedule;
+
     @BeforeEach
     void setup() {
-        User user1 = new User("David", "Davidson");
+        User creator = new User("John", "Johnson");
 
-        User user2 = new User("Mark", "Markson");
+        // creating localdate objects
+        date1 = LocalDate.parse("2023-07-11");
 
-        User user3 = new User("Peter", "Competer");
+        date2 = LocalDate.parse("2023-07-18");
 
-        task1 = new Task("Clean the house", "The house needs to be cleaned", user1);
+        date3 = LocalDate.parse("2023-07-25");
 
-        task2 = new Task("Mow the lawn", "The grass is now very long", user2);
+        // creating task objects
+        task1 = new Task("Finish homework", "Finish your math homework", creator);
 
-        task3 = new Task("Repair the car", "The left fronlight is out!", user3);
+        task2 = new Task("Walk the dog", "The dog needs to pee you know?!", creator);
 
-        LocalDate startDate1 = LocalDate.parse("2023-06-05");
-
-        LocalDate startDate2 = LocalDate.parse("2023-06-05");
-
-        Interval interval1 = new Interval(startDate1, 1);
-
-        Interval interval2 = new Interval(startDate2, 2);
-
-        repeater1 = new RepeatingTask("Water the plants", "The plants does seem a bit thirsty.", user3, interval1);
-
-        repeater2 = new RepeatingTask("Change the bedsheets", "Time to change to clean bedsheets.", user2, interval2);
-
-        // task1 is assigned to all users
-        task1.assign(user1);
-
-        task1.assign(user2);
-
-        task1.assign(user3);
-
-        // task2 and task3 are only assigned to user 3
-        task2.assign(user3);
-
-        task3.assign(user3);
-
-        // adding the tasks to day objects
-        LocalDate date1 = LocalDate.parse("2023-06-05");
-
-        Day day1 = new Day(date1);
+        // creating day objects
+        Day day1 = new Day(date3);
 
         day1.add(task1);
-
-        LocalDate date2 = LocalDate.parse("2023-06-12");
 
         Day day2 = new Day(date2);
 
         day2.add(task2);
 
-        day2.add(task3);
+        // creating intervals and repeatingtask objects
+        Interval interval1 = new Interval(date1, 2);
 
-        // creating the schedule
+        interval1.addWeekday("tuesday");
+
+        Interval interval2 = new Interval(date2, 2);
+
+        interval2.addWeekday("tuesday");
+
+        interval2.addWeekday("friday");
+
+        repeater1 = new RepeatingTask("Clean the bathroom", "Clean the bathroom with water and soap",
+                creator, interval1);
+
+        repeater2 = new RepeatingTask("Empty garbage", "Empty the garbage before it gets full", creator,
+                interval2);
+
+        // creating the schedule object
         schedule = new Schedule();
 
-        schedule.getDayList().add(day1);
+        schedule.addDay(day1);
 
-        schedule.getDayList().add(day2);
+        schedule.addDay(day2);
 
-        schedule.getRepeatingTasks().add(repeater1);
+        schedule.addRepeatingTask(repeater1);
 
-        schedule.getRepeatingTasks().add(repeater2);
+        schedule.addRepeatingTask(repeater2);
     }
 
     /**
-     * Tests that the getAllDayTasks() method returns all the tasks held by
-     * individual days.
+     * Tests that the getDay() method returns a day as expected.
+     * The day is expected to contain all the tasks registered to the day, as well
+     * as instances of repeating tasks hitting the date of the day.
      */
     @Test
-    void testGetAllDayTasks() {
-        TaskList result = schedule.getAllDayTasks();
+    void testGetDay1() {
+        Day generatedDay = schedule.getDay(date3);
 
-        assertTrue(result.contains(task1));
+        assertTrue(generatedDay.contains(task1));
 
-        assertTrue(result.contains(task2));
-
-        assertTrue(result.contains(task3));
-
-        assertFalse(result.contains(repeater1));
-
-        assertFalse(result.contains(repeater2));
+        assertTrue(generatedDay.contains(repeater1.getInstance()));
     }
 
     /**
-     * Tests that the getAllTasks() method returns all the tasks in the schedule.
+     * Tests that the getDay() method returns a day as expected.
+     * In this test, no day is currently available for the date in the schedule,
+     * which means that the generator has to create a new day.
      */
     @Test
-    void testGetAllTasks() {
-        TaskList result = schedule.getAllTasks();
+    void testGetDay2() {
+        Day generatedDay = schedule.getDay(date1);
 
-        assertTrue(result.contains(task1));
+        assertTrue(generatedDay.contains(repeater1.getInstance()));
 
-        assertTrue(result.contains(task2));
-
-        assertTrue(result.contains(task3));
-
-        assertTrue(result.contains(repeater1));
-
-        assertTrue(result.contains(repeater2));
-
-        assertTrue(result.size() == 5);
+        assertTrue(generatedDay.size() == 1);
     }
 }

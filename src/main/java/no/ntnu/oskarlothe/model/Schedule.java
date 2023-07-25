@@ -77,6 +77,16 @@ public class Schedule {
     }
 
     /**
+     * Adds a day to the schedule.
+     * 
+     * @param day day to add
+     * @return true if successfully added, false if not
+     */
+    public boolean addDay(Day day) {
+        return this.days.add(day);
+    }
+
+    /**
      * Adds a repeating task to the schedule.
      * 
      * @param task the task to add
@@ -94,5 +104,22 @@ public class Schedule {
      */
     public boolean removeRepeatingTask(RepeatingTask task) {
         return this.getRepeatingTasks().remove(task);
+    }
+
+    /**
+     * Adds all the tasks for each day in the schedule to one list, and then returns it.
+     * 
+     * @return one single list with all tasks in the schedule
+     */
+    public TaskList getAllTasks() {
+        TaskList result = new TaskList();
+
+        this.days.forEach(
+            (day) -> {
+                result.addAll(day);
+            }
+        );
+
+        return result;
     }
 }

@@ -25,6 +25,8 @@ public class RepeatingTaskInstance extends Task {
         if (mother == null) {
             throw new IllegalArgumentException("Cannot create RepeatingTaskInstance, because mother is null.");
         }
+
+        this.mother = mother;
     }
 
     /**
@@ -34,5 +36,26 @@ public class RepeatingTaskInstance extends Task {
      */
     public RepeatingTask getMother() {
         return this.mother;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + this.mother.hashCode();
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+
+        if (!(o instanceof RepeatingTaskInstance)) {
+            return false;
+        }
+
+        RepeatingTaskInstance instance = (RepeatingTaskInstance) o;
+        return this.mother.equals(instance.getMother());
     }
 }

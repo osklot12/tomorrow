@@ -33,6 +33,8 @@ public class ScheduleCleanerTest {
 
     RepeatingTask repeater1;
 
+    RepeatingTaskInstance repeaterInstance;
+
     UserList users;
 
     /**
@@ -64,6 +66,8 @@ public class ScheduleCleanerTest {
 
         repeater1 = new RepeatingTask("Water the plants", "Water all plants except the cactuses.", user1, interval1);
 
+        repeaterInstance = repeater1.getInstance();
+
         // task1 is assigned to all users
         task1.assign(user1);
 
@@ -90,6 +94,8 @@ public class ScheduleCleanerTest {
         day2.add(task2);
 
         day2.add(task3);
+
+        day2.add(repeaterInstance);
 
         // creating the schedule
         Schedule schedule = new Schedule();
@@ -119,7 +125,7 @@ public class ScheduleCleanerTest {
 
         assertTrue(tasks.contains(task3));
 
-        assertTrue(tasks.contains(repeater1));
+        assertTrue(tasks.contains(repeaterInstance));
 
         assertFalse(tasks.contains(task1));
     }

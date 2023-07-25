@@ -3,7 +3,7 @@ package no.ntnu.oskarlothe.model;
 /**
  * A class responsible for cleaning up tasks for a Schedule object.
  * The ScheduleCleaner is useful when removing users from an Environment, making
- * it possible to remove the associated tasks at the same time.
+ * it possible to remove all the associated tasks at the same time.
  * 
  * @author Oskar Lothe
  * @version 1.0-SNAPSHOT
@@ -51,7 +51,7 @@ public class ScheduleCleaner {
         // checks for dead tasks in all tasks from the daylist
         this.schedule.getAllTasks().forEach(
                 (task) -> {
-                    UserList assignees = task.getStatus().getAssignees();
+                    UserList assignees = task.getAssignees();
 
                     boolean anyMatch = assignees.stream().anyMatch(user -> users.contains(user));
 
