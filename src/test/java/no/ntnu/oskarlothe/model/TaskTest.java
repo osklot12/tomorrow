@@ -124,7 +124,7 @@ public class TaskTest {
 
         assertTrue(unassigned);
 
-        assertFalse(task.getStatus().getAssignees().contains(user));
+        assertFalse(task.getAssignees().contains(user));
     }
 
     /**

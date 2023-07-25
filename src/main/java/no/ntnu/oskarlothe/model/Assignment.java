@@ -1,7 +1,5 @@
 package no.ntnu.oskarlothe.model;
 
-import no.ntnu.oskarlothe.model.notification.ChangedTaskHeaderNotification;
-
 /**
  * An abstract class representing an assignment.
  * Assignments are some data assigned to different users.
@@ -135,9 +133,7 @@ public abstract class Assignment {
             throw new IllegalArgumentException("Cannot set header, because header is not defined.");
         }
 
-        String oldHeader = this.header;
         this.header = header;
-        this.notifier.sendNotification(new ChangedTaskHeaderNotification(this, oldHeader, this.header));
     }
 
     /**

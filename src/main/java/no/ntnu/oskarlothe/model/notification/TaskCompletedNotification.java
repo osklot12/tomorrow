@@ -18,8 +18,10 @@ public class TaskCompletedNotification extends TaskNotification {
      * @param task      the task of the notification
      * @param completer the completer of the task
      */
-    public TaskCompletedNotification(Task task, User completer) {
+    public TaskCompletedNotification(Task task) {
         super(task);
+
+        User completer = task.getStatus().getCompleter();
 
         if (completer == null) {
             throw new IllegalArgumentException("Cannot create TaskCompletedNotification, because completer is null.");

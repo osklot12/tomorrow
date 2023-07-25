@@ -14,7 +14,7 @@ public class Task extends Assignment implements Doable {
     /**
      * Constructor for the Task class.
      * 
-     * @param header the header of the task
+     * @param header  the header of the task
      * @param content the content of the task
      * @param creator the creator of the task
      */
@@ -27,8 +27,8 @@ public class Task extends Assignment implements Doable {
     /**
      * Constructor for the Task class, allowing for a premade status.
      * 
-     * @param status the status of the task
-     * @param header the header of the task
+     * @param status  the status of the task
+     * @param header  the header of the task
      * @param content the content of the task
      * @param creator the creator of the task
      */
@@ -36,6 +36,28 @@ public class Task extends Assignment implements Doable {
         super(header, content, creator);
 
         this.status = status;
+    }
+
+    @Override
+    public boolean assign(User user) {
+        boolean success = super.assign(user);
+
+        if (success) {
+            this.getNotifier().subscribe(user);
+        }
+
+        return success;
+    }
+
+    @Override
+    public boolean unassign(User user) {
+        boolean success = super.unassign(user);
+
+        if (success) {
+            this.getNotifier().unsubscribe(user);
+        }
+
+        return success;
     }
 
     /**
@@ -54,6 +76,8 @@ public class Task extends Assignment implements Doable {
      */
     public void doTask(User user) {
         this.status.complete(user);
+
+        this.getNotifier().sendTaskCompletedNotification(this);
     }
 
     /**

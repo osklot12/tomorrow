@@ -1,6 +1,5 @@
 package no.ntnu.oskarlothe.model;
 
-import no.ntnu.oskarlothe.model.notification.ChangedTaskHeaderNotification;
 import no.ntnu.oskarlothe.model.notification.Notification;
 import no.ntnu.oskarlothe.model.notification.TaskCompletedNotification;
 
@@ -85,26 +84,8 @@ public class TaskNotifier implements Notifier {
             throw new IllegalArgumentException("Cannot send TaskCompletedNotification, because task is null.");
         }
 
-        Notification taskCompletedNotification = new TaskCompletedNotification(task, task.getStatus().getCompleter());
+        Notification taskCompletedNotification = new TaskCompletedNotification(task);
 
         this.sendNotification(taskCompletedNotification);
-    }
-
-    /**
-     * Creates a new ChangedTaskHeaderNotification and sends it to all the
-     * subscribed users of the task.
-     * 
-     * @param task      the task that had a change to its header
-     * @param oldHeader the old header of the task
-     */
-    public void sendChangedTaskHeaderNotification(Task task, String oldHeader) {
-        if (task == null) {
-            throw new IllegalArgumentException("Cannot send ChangedTaskHeaderNotification, because task is null.");
-        }
-
-        Notification changedTaskHeaderNotification = new ChangedTaskHeaderNotification(task, oldHeader,
-                task.getHeader());
-
-        this.sendNotification(changedTaskHeaderNotification);
     }
 }

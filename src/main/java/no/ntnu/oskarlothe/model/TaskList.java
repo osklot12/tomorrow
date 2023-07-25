@@ -33,6 +33,9 @@ public class TaskList extends AssignmentList<Task> {
 
     @Override
     public boolean add(Task task) {
+        if (this.contains(task)) {
+            throw new TaskAlreadyExistsException("Cannot add task to the list, because task already exists.");
+        }
         return super.add(task);
     }
 

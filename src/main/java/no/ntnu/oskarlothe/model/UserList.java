@@ -33,8 +33,7 @@ public class UserList extends ArrayList<User> {
     @Override
     public boolean add(User user) {
         if (!this.contains(user)) {
-            super.add(user);
-            return true;
+            return super.add(user);
         }
 
         return false;

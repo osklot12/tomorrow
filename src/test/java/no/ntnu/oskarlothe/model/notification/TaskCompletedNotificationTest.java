@@ -52,6 +52,8 @@ public class TaskCompletedNotificationTest {
 
         task.doTask(user1);
 
+        assertTrue(task.getNotifier().getSubscribers().contains(user1));
+
         assertTrue(user1.getNotifications().size() == 1);
 
         assertEquals("The task 'Walk the dog' has been completed by Mickey Mouse",
