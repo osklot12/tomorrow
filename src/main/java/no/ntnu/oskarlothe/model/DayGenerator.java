@@ -16,7 +16,7 @@ public class DayGenerator {
      * @param repeaters repeating tasks to add to day
      * @return a new day object
      */
-    public static Day generate(LocalDate date, DayList days, TaskList repeaters) {
+    public static Day generate(LocalDate date, DayList days, RepeatingTaskList repeaters) {
         if (date == null) {
             throw new IllegalArgumentException("LocalDate must be defined.");
         }

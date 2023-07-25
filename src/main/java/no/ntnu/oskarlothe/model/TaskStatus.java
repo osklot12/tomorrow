@@ -1,11 +1,7 @@
 package no.ntnu.oskarlothe.model;
 
-import java.util.List;
-
-import no.ntnu.oskarlothe.model.exception.NoSuchUserException;
 import no.ntnu.oskarlothe.model.exception.TaskAlreadyCompletedException;
 import no.ntnu.oskarlothe.model.exception.TaskNotCompletedException;
-import no.ntnu.oskarlothe.model.exception.UserAlreadyExistsException;
 
 /**
  * A class representing a status for a spesific task.
@@ -23,29 +19,12 @@ import no.ntnu.oskarlothe.model.exception.UserAlreadyExistsException;
  * @version 1.0-SNAPSHOT
  */
 public class TaskStatus {
-    private UserList assignees;
-
     private User completer;
 
     /**
      * Constructor for the TaskStatus class.
      */
     public TaskStatus() {
-        this.assignees = new UserList();
-        this.completer = null;
-    }
-
-    /**
-     * Constructor for the TaskStatus class, with a predefined list of assignees.
-     * 
-     * @param assignees list of users assinged to the task
-     */
-    public TaskStatus(List<User> assignees) {
-        if (assignees == null) {
-            throw new IllegalArgumentException("Assignees cannot be null");
-        }
-
-        this.assignees = new UserList(assignees);
         this.completer = null;
     }
 
@@ -59,40 +38,6 @@ public class TaskStatus {
     }
 
     /**
-     * Assignes a user to the TaskStatus object.
-     * 
-     * @param user user to assign
-     */
-    public void assign(User user) {
-        if (user == null) {
-            throw new IllegalArgumentException("Cannot assign to null user.");
-        }
-
-        if (this.assignees.contains(user)) {
-            throw new UserAlreadyExistsException("User is already assigned.");
-        }
-
-        this.assignees.add(user);
-    }
-
-    /**
-     * Unassignes a user to the TaskStatus object.
-     * 
-     * @param user user to unassign
-     */
-    public void unassign(User user) {
-        if (user == null) {
-            throw new IllegalArgumentException("Cannot unassign null user.");
-        }
-
-        if (!(this.assignees.contains(user))) {
-            throw new NoSuchUserException("The user is not assigned to the task.");
-        }
-
-        this.assignees.remove(user);
-    }
-
-    /**
      * Adds a 'completer' to the TaskStatus object.
      * 
      * @param user user that completed the task
@@ -100,10 +45,6 @@ public class TaskStatus {
     public void complete(User user) {
         if (user == null) {
             throw new IllegalArgumentException("Cannot complete task with null user.");
-        }
-
-        if (!(this.assignees.contains(user))) {
-            throw new NoSuchUserException("The user is not assigned to the task.");
         }
 
         if (!(this.completer == null)) {
@@ -125,15 +66,6 @@ public class TaskStatus {
     }
 
     /**
-     * Returns the list of assignees of the task.
-     * 
-     * @return list of users assigned to the task
-     */
-    public UserList getAssignees() {
-        return this.assignees;
-    }
-
-    /**
      * Returns the user that completed the task.
      * If the task is not done yet, null is returned.
      * 
@@ -141,5 +73,10 @@ public class TaskStatus {
      */
     public User getCompleter() {
         return this.completer;
+    }
+
+    @Override
+    public TaskStatus clone() {
+        return new TaskStatus();
     }
 }

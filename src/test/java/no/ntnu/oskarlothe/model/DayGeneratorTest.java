@@ -29,7 +29,7 @@ public class DayGeneratorTest {
 
     RepeatingTask repeater2;
 
-    TaskList repeaters;
+    RepeatingTaskList repeaters;
 
     /**
      * Setting up for the following test methods.
@@ -59,7 +59,7 @@ public class DayGeneratorTest {
         repeater1 = new RepeatingTask("Walk the dog", "The dog needs to pee u know!", creator, interval1);
         repeater2 = new RepeatingTask("Water the plants", "Your plants are dying!", creator, interval2);
 
-        repeaters = new TaskList();
+        repeaters = new RepeatingTaskList();
         repeaters.add(repeater1);
         repeaters.add(repeater2);
     }

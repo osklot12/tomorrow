@@ -13,7 +13,7 @@ import no.ntnu.oskarlothe.model.exception.AssignmentAlreadyExistsException;
  * @author Oskar Lothe
  * @version 1.0-SNAPSHOT
  */
-public class AssignmentList extends ArrayList<Assignment> {
+public class AssignmentList<T extends Assignment> extends ArrayList<T> {
     /**
      * Default constructor for the AssignmentList class.
      */
@@ -27,12 +27,12 @@ public class AssignmentList extends ArrayList<Assignment> {
      * 
      * @param assignments list of assignments to copy
      */
-    public AssignmentList(List<Assignment> assignments) {
+    public AssignmentList(List<T> assignments) {
         super(assignments);
     }
 
     @Override
-    public boolean add(Assignment assignment) {
+    public boolean add(T assignment) {
         if (assignment == null) {
             throw new IllegalArgumentException("Cannot add assignment, because assignment is null.");
         }
@@ -46,8 +46,8 @@ public class AssignmentList extends ArrayList<Assignment> {
     }
 
     @Override
-    public boolean addAll(Collection<? extends Assignment> c) {
-        for (Assignment assignment : c) {
+    public boolean addAll(Collection<? extends T> c) {
+        for (T assignment : c) {
             if (!this.contains(assignment)) {
                 this.add(assignment);
             }
@@ -158,7 +158,7 @@ public class AssignmentList extends ArrayList<Assignment> {
     }
 
     @Override
-    public AssignmentList clone() {
+    public AssignmentList<T> clone() {
         AssignmentList list = new AssignmentList();
 
         this.forEach(

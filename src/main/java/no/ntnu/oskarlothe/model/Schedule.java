@@ -16,14 +16,14 @@ import java.time.LocalDate;
 public class Schedule {
     private DayList days;
 
-    private TaskList repeatingTasks;
+    private RepeatingTaskList repeaters;
 
     /**
      * Default constructor for the Schedule class.
      */
     public Schedule() {
         this.days = new DayList();
-        this.repeatingTasks = new TaskList();
+        this.repeaters = new RepeatingTaskList();
     }
 
     /**
@@ -33,7 +33,7 @@ public class Schedule {
      * @return day object matching the given date
      */
     public Day getDay(LocalDate date) {
-        return DayGenerator.generate(date, this.days, this.repeatingTasks);
+        return DayGenerator.generate(date, this.days, this.repeaters);
     }
 
     /**
@@ -50,43 +50,8 @@ public class Schedule {
      * 
      * @return TaskList containing repeating task objects
      */
-    public TaskList getRepeatingTasks() {
-        return this.repeatingTasks;
-    }
-
-    /**
-     * Returns all tasks from the list of days.
-     * 
-     * @return all tasks from the individual days
-     */
-    public TaskList getAllDayTasks() {
-        TaskList result = new TaskList();
-
-        this.days.forEach(
-            (day) -> {
-                day.forEach(
-                    (task) -> {
-                        result.add(task);
-                    }
-                );
-            }
-        );
-
-        return result;
-    }
-
-    /**
-     * Returns a list of all the tasks in the schedule; both tasks from the days and
-     * the repeating tasks.
-     * 
-     * @return TaskList object containing all tasks
-     */
-    public TaskList getAllTasks() {
-        TaskList result = this.getAllDayTasks().clone();
-
-        result.addAll(this.repeatingTasks);
-
-        return result;
+    public RepeatingTaskList getRepeatingTasks() {
+        return this.repeaters;
     }
 
     /**

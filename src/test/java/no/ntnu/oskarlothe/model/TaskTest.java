@@ -80,7 +80,7 @@ public class TaskTest {
 
         assertTrue(assigned);
 
-        boolean userAdded = task.getStatus().getAssignees().contains(user);
+        boolean userAdded = task.getAssignees().contains(user);
 
         assertTrue(userAdded);
     }
@@ -103,7 +103,7 @@ public class TaskTest {
 
         assertFalse(assigned);
 
-        assertTrue(task.getStatus().getAssignees().size() == 1);
+        assertTrue(task.getAssignees().size() == 1);
     }
 
     /**

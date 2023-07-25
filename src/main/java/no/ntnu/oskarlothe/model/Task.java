@@ -50,7 +50,7 @@ public class Task extends Assignment implements Doable {
     /**
      * Does the task.
      * 
-     * @param user the user which completed the task
+     * @param user the user which completes the task
      */
     public void doTask(User user) {
         this.status.complete(user);
@@ -75,7 +75,7 @@ public class Task extends Assignment implements Doable {
      */
     @Override
     public Task clone() {
-        return new Task(new TaskStatus(this.status.getAssignees()), this.getHeader(), this.getContent(), this.getCreator());
+        return new Task(this.status.clone(), this.getHeader(), this.getContent(), this.getCreator());
     }
 
     @Override

@@ -186,7 +186,7 @@ public class TaskListTest {
         list.add(task2);
         list.add(task3);
 
-        task2.getStatus().assign(creator);
+        task2.assign(creator);
         task2.getStatus().complete(creator);
 
         List<Task> result = list.getDoneTasks();
@@ -264,36 +264,5 @@ public class TaskListTest {
         assertTrue(list.contains(task2));
 
         assertTrue(list.size() == 2);
-    }
-
-    /**
-     * Tests that the getRepeatingTasksForDate() method returns a list of repeating
-     * tasks as expected.
-     */
-    @Test
-    void testGetRepeatingTasksForDate() {
-        User creator = new User("John", "Johnny", "");
-        
-        Task task1 = new Task("Empty the trash", "The trash is full and needs to be emptied.", creator);
-        
-        LocalDate startDate = LocalDate.parse("2023-06-05");
-
-        Interval interval = new Interval(startDate, 1);
-
-        interval.addWeekday("monday");
-
-        RepeatingTask repeater = new RepeatingTask("Mop the floor", "The floor is dirty.", creator, interval);
-
-        TaskList taskList = new TaskList();
-
-        taskList.add(task1);
-
-        taskList.add(repeater);
-
-        List<RepeatingTask> result = taskList.getRepeatingTasksForDate(startDate);
-
-        assertTrue(result.contains(repeater));
-
-        assertFalse(result.contains(task1));
     }
 }
