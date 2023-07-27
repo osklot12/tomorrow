@@ -1,0 +1,13 @@
+/* Styling for the calendar button component */
+.calendar-button {
+    -fx-background-color: #f5f5f5;
+    -fx-padding: 20px;
+    -fx-background-radius: 0px;
+    -fx-border-color: #C4B0FF;
+    -fx-border-width: 2px;
+    -fx-fill: rgb(35, 35, 35);
+}
+
+.calendar-button > text {
+    -fx-fill: red;
+}

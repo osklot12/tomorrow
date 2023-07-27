@@ -114,6 +114,12 @@
             <version>${javafx.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>de.jensd</groupId>
+            <artifactId>fontawesomefx</artifactId>
+            <version>8.2</version>
+        </dependency>
+
         <!--
         And of course we need to add support for JUnit5-testing ;-)
         REMEMBER to add the scope-part!

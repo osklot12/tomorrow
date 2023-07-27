@@ -159,7 +159,7 @@ public class AssignmentList<T extends Assignment> extends ArrayList<T> {
 
     @Override
     public AssignmentList<T> clone() {
-        AssignmentList list = new AssignmentList();
+        AssignmentList<T> list = new AssignmentList<>();
 
         this.forEach(
                 (assignment) -> {

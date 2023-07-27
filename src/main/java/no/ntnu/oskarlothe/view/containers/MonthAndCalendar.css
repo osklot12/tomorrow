@@ -1,0 +1,7 @@
+/* Styling for the month and calendar component */
+.month-and-calendar {
+    -fx-background-color: #C4B0FF;
+    -fx-min-width: 500px;
+
+    -fx-hgrow: ALWAYS;
+}

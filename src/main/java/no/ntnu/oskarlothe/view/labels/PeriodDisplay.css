@@ -1,0 +1,8 @@
+/* Styling for the period display component */
+.period-display {
+    -fx-font-size: 30px;
+    -fx-padding: 10px 20px 10px 20px;
+
+    -fx-alignment: center;
+    -fx-text-fill: rgb(35, 35, 35);
+}

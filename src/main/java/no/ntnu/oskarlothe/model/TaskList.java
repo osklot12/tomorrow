@@ -1,8 +1,6 @@
 package no.ntnu.oskarlothe.model;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import no.ntnu.oskarlothe.model.exception.TaskAlreadyExistsException;

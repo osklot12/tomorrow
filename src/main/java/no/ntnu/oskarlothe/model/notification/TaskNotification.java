@@ -2,7 +2,6 @@ package no.ntnu.oskarlothe.model.notification;
 
 import java.time.LocalDateTime;
 
-import no.ntnu.oskarlothe.model.Assignment;
 import no.ntnu.oskarlothe.model.Task;
 import no.ntnu.oskarlothe.model.User;
 

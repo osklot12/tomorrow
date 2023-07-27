@@ -1,6 +1,7 @@
 package no.ntnu.oskarlothe.view.buttons;
 
 import javafx.scene.control.Button;
+import no.ntnu.oskarlothe.view.StyleApplier;
 
 /**
  * A class representing a JavaFX component for the do button, allowing users to
@@ -20,7 +21,7 @@ public class DoButton extends Button {
         this.setText(text);
 
         this.getStyleClass().add("do-button");
-        this.getStylesheets().add("DoButton.css");
+        StyleApplier.addStyleSheet(this, "DoButton.css");
     }
 
 

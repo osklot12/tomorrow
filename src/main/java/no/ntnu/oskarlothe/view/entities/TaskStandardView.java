@@ -1,6 +1,6 @@
 package no.ntnu.oskarlothe.view.entities;
 
-import javafx.concurrent.Task;
+import no.ntnu.oskarlothe.model.Task;
 import javafx.scene.layout.HBox;
 
 /**
