@@ -1,0 +1,4 @@
+/* Styling for the VBoxFlexContainer component */
+.vbox-flex-container {
+    -fx-alignment: center;
+}

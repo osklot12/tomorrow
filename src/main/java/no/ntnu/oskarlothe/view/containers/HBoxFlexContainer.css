@@ -1,4 +1,5 @@
 /* Styling for the HBox Flex Container component*/
 .hbox-flex-container {
     -fx-hgrow: ALWAYS;
+    -fx-alignment: center_left;
 }
