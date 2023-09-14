@@ -5,6 +5,9 @@ import no.ntnu.oskarlothe.model.Task;
 
 /**
  * A class representing a command for changing the title of a task.
+ * 
+ * @author Oskar Lothe
+ * @version 1.0-SNAPSHOT
  */
 public class EditTaskTitleCommand implements Command {
     private Task task;

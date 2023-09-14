@@ -10,13 +10,13 @@ package no.ntnu.oskarlothe.model;
  * field, making it only possible to do the tasks that are assigned to this
  * user. The user can also only change tasks that are created by the user,
  * protecting tasks from being changed by someone else.
- * <p/>
+ * </p>
  * 
  * <p>
  * The Environment class also holds notifications with data for individual
  * users, making
  * each user have their personalized notification section.
- * <p/>
+ * </p>
  * 
  * @author Oskar Lothe
  * @version 1.0-SNAPSHOT

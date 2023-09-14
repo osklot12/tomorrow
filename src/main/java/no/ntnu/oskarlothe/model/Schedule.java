@@ -46,6 +46,11 @@ public class Schedule {
     }
 
     /**
+     * this is the best part of the new screen
+     * @return
+     */
+
+    /**
      * Returns the list of repeating tasks.
      * 
      * @return TaskList containing repeating task objects

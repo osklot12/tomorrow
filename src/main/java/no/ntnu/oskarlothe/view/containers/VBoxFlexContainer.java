@@ -15,6 +15,8 @@ import no.ntnu.oskarlothe.view.StyleApplier;
 public class VBoxFlexContainer extends VBox {
     /**
      * Constructor for the VBoxFlexContainer class.
+     * 
+     * @param children the children to add 
      */
     public VBoxFlexContainer(Node... children) {
         super(children);

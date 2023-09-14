@@ -7,7 +7,7 @@ import no.ntnu.oskarlothe.model.regionstrategy.RegionStrategy;
 /**
  * A class representing an period of 24 hours: a full day.
  * The day class is part of the core concept of the application, as it allows
- * users to assign tasks to individual day, like tomorrow.
+ * users to assign tasks to individual days, like tomorrow.
  * 
  * @author Oskar Lothe
  * @version 1.0-SNAPSHOT
@@ -55,12 +55,10 @@ public class Day extends TaskList implements Period {
         return this.date;
     }
 
-    @Override
     public Report generateReport(User creator) {
         return new Report(creator, this.clone());
     }
 
-    @Override
     public String getPeriodAsString(RegionStrategy region) {
         return region.getDateAsWords(this.date);
     }

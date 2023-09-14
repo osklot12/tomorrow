@@ -1,9 +1,6 @@
 package no.ntnu.oskarlothe.view.labels;
 
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.text.Font;
 import no.ntnu.oskarlothe.view.StyleApplier;
 
 /**
@@ -24,7 +21,5 @@ public class PeriodDisplay extends Label {
         StyleApplier.applyApplicationStyle(this);
         StyleApplier.addStyleClass(this, "period-display");
         StyleApplier.addStyleSheet(this, "PeriodDisplay.css");
-
-
     }
 }

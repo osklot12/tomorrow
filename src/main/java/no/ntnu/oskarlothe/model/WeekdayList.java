@@ -38,6 +38,12 @@ public class WeekdayList extends ArrayList<String> {
         return false;
     }
 
+    /**
+     * Checks if the dynamic sequence contains a spesific key, ignoring case.
+     * 
+     * @param key the key to check
+     * @return true if key is found, false if not
+     */
     public boolean containsIgnoreCase(String key) {
         for (String weekday : this) {
             if (weekday.equalsIgnoreCase(key)) return true;

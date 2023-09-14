@@ -1,0 +1,10 @@
+/* Styling for all day navigation boxes */
+.day-navigation-box {
+    -fx-alignment: center;
+    -fx-padding: 5px;
+}
+
+/* Styling for when the box i hovered over */
+.day-navigation-box:hover {
+    -fx-cursor: hand;
+}

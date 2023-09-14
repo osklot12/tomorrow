@@ -15,6 +15,8 @@ public class TaskStandardView extends HBox {
 
     /**
      * Constructor for the TaskStandardView class.
+     * 
+     * @param task the task to display
      */
     public TaskStandardView(Task task) {
         super();

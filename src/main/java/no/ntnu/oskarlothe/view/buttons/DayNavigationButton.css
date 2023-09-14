@@ -1,0 +1,46 @@
+/* Styling for the DayNavigationButton */
+.day-navigation-button {
+    -fx-min-width: 100px;
+    -fx-min-height: 100px;
+
+    -fx-border-width: 0;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 2, 0, 0, 2);
+    -fx-background-color: #e4e4e4b2;
+
+    -fx-transition: background-color 0.3s, text-fill 0.3s;
+}
+
+/* Styling for the DayNavigationButton, when hovering over it */
+.day-navigation-button:hover {
+    -fx-background-color: #4942E4;
+}
+
+/* Styling for the DayNavigationButton, when it is in toggled state */
+.toggled-state {
+    -fx-border-width: 2px;
+    -fx-border-color: #696969b2;
+
+    -fx-min-width: 96px;
+    -fx-min-height: 96px;
+
+}
+
+/* Styling for the DayNavigationButton, when it is in untoggled state */
+.untoggled-state {
+    -fx-border-width: 0;
+
+    -fx-min-width: 100px;
+    -fx-min-height: 100px;
+}
+
+.past-button {
+    -fx-background-color: #8696FE;
+}
+
+.today-button {
+    -fx-background-color: #cccccc;
+}
+
+.future-button {
+    -fx-background-color: #e4e4e4b2;
+}

@@ -1,9 +1,7 @@
 package no.ntnu.oskarlothe.view.containers;
 
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import no.ntnu.oskarlothe.view.StyleApplier;
 

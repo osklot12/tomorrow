@@ -16,7 +16,6 @@ public class TaskCompletedNotification extends TaskNotification {
      * Constructor for the TaskCompletedNotification class.
      * 
      * @param task      the task of the notification
-     * @param completer the completer of the task
      */
     public TaskCompletedNotification(Task task) {
         super(task);
