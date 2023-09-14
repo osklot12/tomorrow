@@ -1,0 +1,8 @@
+/* Styling for all navigation button components */
+.navigation-button {
+    -fx-background-color: transparent;
+}
+
+.navigation-button:hover {
+    -fx-cursor: hand;
+}

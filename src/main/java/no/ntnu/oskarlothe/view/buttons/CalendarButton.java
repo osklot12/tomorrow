@@ -25,7 +25,7 @@ public class CalendarButton extends Button {
     /**
      * Initializes the component.
      */
-    public void init() {
+    private void init() {
         Text calendarIcon = GlyphsDude.createIcon(FontAwesomeIcons.CALENDAR, "30px");
         this.setGraphic(calendarIcon);
     }

@@ -1,6 +1,6 @@
 /* Styling for the month and calendar component */
 .month-and-calendar {
-    -fx-background-color: #C4B0FF;
+    -fx-background-color: #e4e4e4;
     -fx-min-width: 500px;
 
     -fx-alignment: center;

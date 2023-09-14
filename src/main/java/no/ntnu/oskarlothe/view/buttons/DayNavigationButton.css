@@ -33,14 +33,27 @@
     -fx-min-height: 100px;
 }
 
+/* Styling for buttons which date has already been */
 .past-button {
     -fx-background-color: #8696FE;
 }
 
+/* Styling for the button that hits the current date */
 .today-button {
     -fx-background-color: #cccccc;
 }
 
+/* Styling for buttons that has not yet been */
 .future-button {
     -fx-background-color: #e4e4e4b2;
+}
+
+/* Styling for all dominant buttons */
+.dominant {
+    -fx-opacity: 1;
+}
+
+/* Styling for non-dominant buttons */
+.submissive {
+    -fx-opacity: 0.5;
 }

@@ -12,12 +12,23 @@ import no.ntnu.oskarlothe.view.StyleApplier;
 public class PeriodDisplay extends Label {
     /**
      * Constructor for the PeriodDisplay class.
+     */
+    public PeriodDisplay() {
+        super();
+
+        StyleApplier.applyApplicationStyle(this);
+        StyleApplier.addStyleClass(this, "period-display");
+        StyleApplier.addStyleSheet(this, "PeriodDisplay.css");
+    }
+
+    /**
+     * Constructor for the PeriodDisplay class.
      * 
      * @param text the text to display
      */
     public PeriodDisplay(String text) {
         super(text);
-        
+
         StyleApplier.applyApplicationStyle(this);
         StyleApplier.addStyleClass(this, "period-display");
         StyleApplier.addStyleSheet(this, "PeriodDisplay.css");

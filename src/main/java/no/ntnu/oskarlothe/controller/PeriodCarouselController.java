@@ -1,12 +1,16 @@
 package no.ntnu.oskarlothe.controller;
 
 import java.time.LocalDate;
+import java.time.Month;
 
 import no.ntnu.oskarlothe.controller.command.DisplayDayCommand;
+import no.ntnu.oskarlothe.controller.command.SetOffsetCommand;
 import no.ntnu.oskarlothe.model.Day;
 import no.ntnu.oskarlothe.model.Schedule;
 import no.ntnu.oskarlothe.view.StyleApplier;
 import no.ntnu.oskarlothe.view.buttons.DayNavigationButton;
+import no.ntnu.oskarlothe.view.buttons.NextNavigationButton;
+import no.ntnu.oskarlothe.view.buttons.PreviousNavigationButton;
 import no.ntnu.oskarlothe.view.containers.PeriodCarousel;
 
 /**
@@ -18,11 +22,11 @@ import no.ntnu.oskarlothe.view.containers.PeriodCarousel;
  * @version 1.0-SNAPSHOT
  */
 public class PeriodCarouselController {
-    PeriodCarousel carousel;
+    private PeriodCarousel carousel;
 
-    int range;
+    private int range;
 
-    int offset;
+    private int offset;
 
     /**
      * Constructor for the PeriodCarouselController.
@@ -52,6 +56,24 @@ public class PeriodCarouselController {
     }
 
     /**
+     * Returns the offset of the controller.
+     * 
+     * @return current offset value
+     */
+    public int getOffset() {
+        return this.offset;
+    }
+
+    /**
+     * Returns the range of the carousel.
+     * 
+     * @return range of carousel
+     */
+    public int getRange() {
+        return this.range;
+    }
+
+    /**
      * Sets the range of the content to be displayed.
      * 
      * @param range value of range, bigger than 0
@@ -73,59 +95,33 @@ public class PeriodCarouselController {
     }
 
     /**
-     * Displays a given day in the schedule, adjusting other content accordingly.
-     * 
-     * @param schedule the schedule to display from
-     * @param toggle   the day object to be toggled
-     */
-    public void display(Schedule schedule, Day toggle) {
-        if (schedule == null) {
-            throw new IllegalArgumentException("Cannot display content, because list is null.");
-        }
-
-        if (toggle == null) {
-            throw new IllegalArgumentException("Cannot display content, because toggle is null.");
-        }
-
-        for (int i = this.offset; i < this.range + this.offset; i++) {
-            Day day = schedule.getDay(toggle.getDate().plusDays(i));
-
-            boolean toggled = false;
-            if (toggle.getDate().equals(day.getDate())) {
-                toggled = true;
-            }
-
-            this.addButton(day, toggled);
-        }
-    }
-
-    /**
      * Adds a single button to the carousel.
      * 
      * @param day day to add
+     * @param toggled indicates if the day is toggled or not
+     * @param dominant indicates wheter the day is dominant or not
+     * @param command the command associated with the button
      */
-    private void addButton(Day day, boolean toggled) {
+    public void addDayButton(Day day, boolean toggled, boolean dominant, DisplayDayCommand command) {
         if (day == null) {
             throw new IllegalArgumentException("Cannot add button, because day is null.");
         }
 
         DayNavigationButton dayButton = new DayNavigationButton(day);
 
-        DisplayDayCommand command = new DisplayDayCommand(day);
-
         dayButton.setOnAction(event -> command.execute());
 
+        if (!dominant) {
+            StyleApplier.addStyleClass(dayButton, "submissive");
+        } else {
+            StyleApplier.addStyleClass(dayButton, "dominant");
+        }
+
         if (day.getDate().isAfter(LocalDate.now())) {
-            StyleApplier.removeStyleClass(dayButton, "past-button");
-            StyleApplier.removeStyleClass(dayButton, "today-button");
             StyleApplier.addStyleClass(dayButton, "future-button");
         } else if (day.getDate().isBefore(LocalDate.now())) {
-            StyleApplier.removeStyleClass(dayButton, "today-button");
-            StyleApplier.removeStyleClass(dayButton, "future-button");
             StyleApplier.addStyleClass(dayButton, "past-button");
         } else {
-            StyleApplier.removeStyleClass(dayButton, "past-button");
-            StyleApplier.removeStyleClass(dayButton, "future-button");
             StyleApplier.addStyleClass(dayButton, "today-button");
         }
 
@@ -134,9 +130,5 @@ public class PeriodCarouselController {
         }
 
         this.carousel.getChildren().add(dayButton);
-    }
-
-    public void toggle(Day day) {
-
     }
 }

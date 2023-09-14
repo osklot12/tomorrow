@@ -1,5 +1,7 @@
 package no.ntnu.oskarlothe.view.containers;
 
+import java.time.LocalDate;
+
 import javafx.scene.layout.HBox;
 import no.ntnu.oskarlothe.view.StyleApplier;
 import no.ntnu.oskarlothe.view.buttons.CalendarButton;
@@ -19,6 +21,11 @@ public class MonthAndCalendar extends HBox {
 
     private CalendarButton calendarButton;
 
+    /**
+     * Constructor for the MonthAndCalendar class.
+     * 
+     * @param focusedDate the date to set in focus
+     */
     public MonthAndCalendar() {
         super();
 
@@ -31,8 +38,8 @@ public class MonthAndCalendar extends HBox {
     /**
      * Initializes the content.
      */
-    public void init() {
-        periodDisplay = new PeriodDisplay("November");
+    private void init() {
+        periodDisplay = new PeriodDisplay();
 
         calendarButton = new CalendarButton();
 
