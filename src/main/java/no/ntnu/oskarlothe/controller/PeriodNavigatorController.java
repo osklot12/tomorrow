@@ -299,7 +299,9 @@ public class PeriodNavigatorController {
 
         int dominantYear = this.getDominantYearFromCarousel();
 
-        String displayText = dominantMonth.toString() + ", " + dominantYear;
+        String monthString = dominantMonth.toString();
+
+        String displayText =  monthString.substring(0, 1) + monthString.substring(1, monthString.length()).toLowerCase() + ", " + dominantYear;
 
         this.getNavigator().getMonthAndCalendar().setPeriodDisplayText(displayText);
     }

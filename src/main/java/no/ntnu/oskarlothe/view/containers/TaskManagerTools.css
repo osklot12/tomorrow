@@ -1,0 +1,5 @@
+/* Styling for all TaskManagerTools components */
+.task-manager-tools {
+    -fx-min-height: 200px;
+    -fx-min-width: 200px;
+}

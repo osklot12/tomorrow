@@ -1,0 +1,5 @@
+/* Styling for all TaskManagerPanel components */
+.task-manager-panel {
+    -fx-padding: 10px;
+    -fx-alignment: center;
+}

@@ -5,6 +5,7 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcons;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import no.ntnu.oskarlothe.view.StyleApplier;
+import no.ntnu.oskarlothe.view.colorpalettes.MainColorPalette;
 
 /**
  * A class representing a JavaFX button component for opening the calendar view.
@@ -27,6 +28,8 @@ public class CalendarButton extends Button {
      */
     private void init() {
         Text calendarIcon = GlyphsDude.createIcon(FontAwesomeIcons.CALENDAR, "30px");
+        MainColorPalette colorPalette = new MainColorPalette();
+        calendarIcon.setFill(colorPalette.getMainGray());
         this.setGraphic(calendarIcon);
     }
 }

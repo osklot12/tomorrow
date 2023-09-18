@@ -1,8 +1,6 @@
 package no.ntnu.oskarlothe.view.layout;
 
 import javafx.scene.layout.VBox;
-import no.ntnu.oskarlothe.model.Day;
-import no.ntnu.oskarlothe.model.Schedule;
 import no.ntnu.oskarlothe.view.containers.MonthAndCalendar;
 import no.ntnu.oskarlothe.view.containers.PeriodCarousel;
 

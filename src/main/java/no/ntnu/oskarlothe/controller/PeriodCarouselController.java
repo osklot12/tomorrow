@@ -1,16 +1,11 @@
 package no.ntnu.oskarlothe.controller;
 
 import java.time.LocalDate;
-import java.time.Month;
 
 import no.ntnu.oskarlothe.controller.command.DisplayDayCommand;
-import no.ntnu.oskarlothe.controller.command.SetOffsetCommand;
 import no.ntnu.oskarlothe.model.Day;
-import no.ntnu.oskarlothe.model.Schedule;
 import no.ntnu.oskarlothe.view.StyleApplier;
 import no.ntnu.oskarlothe.view.buttons.DayNavigationButton;
-import no.ntnu.oskarlothe.view.buttons.NextNavigationButton;
-import no.ntnu.oskarlothe.view.buttons.PreviousNavigationButton;
 import no.ntnu.oskarlothe.view.containers.PeriodCarousel;
 
 /**

@@ -1,7 +1,6 @@
 /* Styling for the period carousel component */
 .period-carousel {
     -fx-padding: 10px;
-
     -fx-alignment: center;
     -fx-spacing: 20px;
 }

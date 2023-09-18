@@ -1,0 +1,5 @@
+/* Styling for all TaskManagerList components */
+.task-manager-list {
+    -fx-min-height: 200px;
+    -fx-min-width: 300px;
+}

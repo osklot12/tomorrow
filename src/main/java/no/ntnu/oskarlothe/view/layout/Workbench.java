@@ -3,6 +3,10 @@ package no.ntnu.oskarlothe.view.layout;
 import javafx.scene.layout.VBox;
 import no.ntnu.oskarlothe.controller.PeriodNavigatorController;
 import no.ntnu.oskarlothe.view.StyleApplier;
+import no.ntnu.oskarlothe.view.containers.TaskManager;
+import no.ntnu.oskarlothe.view.containers.TaskManagerList;
+import no.ntnu.oskarlothe.view.containers.TaskManagerPanel;
+import no.ntnu.oskarlothe.view.containers.TaskManagerTools;
 
 /**
  * A class representing the main working bench of the application.
@@ -21,14 +25,23 @@ public class Workbench extends VBox {
 
     private PeriodNavigatorController navigatorController;
 
+    private TaskManager taskManager;
+
+    /**
+     * Constructor for the Workbench class.
+     */
     public Workbench() {
         super();
 
-        StyleApplier.addStyleSheet(this, "Workbench.css");
+        StyleApplier.addStyleClass(this, "workbench");
+
+        StyleApplier.addStyleSheet(this);
 
         this.periodNavigator = new PeriodNavigator();
 
         this.navigatorController = new PeriodNavigatorController(this.periodNavigator);
+
+        this.taskManager = new TaskManager();
 
         this.init();
     }
@@ -37,6 +50,32 @@ public class Workbench extends VBox {
      * Initializes the component.
      */
     private void init() {
-        this.getChildren().add(periodNavigator);
+        TaskManagerPanel buttonPanel = new TaskManagerPanel();
+
+
+
+        TaskManagerPanel panel = new TaskManagerPanel("Monday 18th", "September 2023");
+
+        TaskManagerList taskList = new TaskManagerList();
+
+        TaskManagerTools taskTools = new TaskManagerTools();
+
+        panel.addComponent(taskList);
+
+        panel.addComponent(taskTools);
+
+        this.taskManager.getChildren().add(panel);
+
+        this.getChildren().add(this.periodNavigator);
+        this.getChildren().add(this.taskManager);
+    }
+
+    /**
+     * Returns the controller for the PeriodNavigator.
+     * 
+     * @return controller of periodnavigator
+     */
+    public PeriodNavigatorController getNavigatorController() {
+        return this.navigatorController;
     }
 }

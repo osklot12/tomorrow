@@ -3,7 +3,6 @@ package no.ntnu.oskarlothe.controller.command;
 import no.ntnu.oskarlothe.controller.PeriodNavigatorController;
 import no.ntnu.oskarlothe.model.Day;
 import no.ntnu.oskarlothe.model.regionstrategy.NoRegionStrategy;
-import no.ntnu.oskarlothe.view.layout.PeriodNavigator;
 
 /**
  * A class representing a command for displaying a spesific day, in the main

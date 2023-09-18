@@ -1,7 +1,5 @@
 package no.ntnu.oskarlothe.view.containers;
 
-import java.time.LocalDate;
-
 import javafx.scene.layout.HBox;
 import no.ntnu.oskarlothe.view.StyleApplier;
 import no.ntnu.oskarlothe.view.buttons.CalendarButton;

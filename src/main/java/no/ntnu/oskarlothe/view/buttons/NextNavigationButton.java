@@ -5,6 +5,8 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcons;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import no.ntnu.oskarlothe.view.StyleApplier;
+import no.ntnu.oskarlothe.view.colorpalettes.ColorPalette;
+import no.ntnu.oskarlothe.view.colorpalettes.MainColorPalette;
 
 /**
  * A class representing a button in JavaFX for navigating to next items in a list.
@@ -30,6 +32,8 @@ public class NextNavigationButton extends Button {
      */
     private void init() {
         Text calendarIcon = GlyphsDude.createIcon(FontAwesomeIcons.ARROW_RIGHT, "30px");
+        ColorPalette colorPalette = new MainColorPalette();
+        calendarIcon.setFill(colorPalette.getMainGray());
         this.setGraphic(calendarIcon);
     }
 }

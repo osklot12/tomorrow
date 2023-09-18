@@ -1,8 +1,6 @@
 package no.ntnu.oskarlothe.controller.command;
 
-import no.ntnu.oskarlothe.controller.PeriodCarouselController;
 import no.ntnu.oskarlothe.controller.PeriodNavigatorController;
-import no.ntnu.oskarlothe.view.layout.PeriodNavigator;
 
 /**
  * A class representing a command for setting the offset of a PeriodCarousel

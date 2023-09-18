@@ -10,3 +10,10 @@
 .clickable:hover {
     -fx-cursor: hand;
 }
+
+/* Styling for all children of the TaskManager component */
+.task-manager-child {
+    -fx-border-color: black;
+    -fx-border-width: 2px;
+    -fx-padding: 10px;
+}

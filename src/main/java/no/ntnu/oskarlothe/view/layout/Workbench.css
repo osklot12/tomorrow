@@ -1,0 +1,4 @@
+/* Styling for all Workbench components */
+.workbench {
+    -fx-padding: 10px;
+}

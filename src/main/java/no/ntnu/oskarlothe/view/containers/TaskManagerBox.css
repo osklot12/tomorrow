@@ -1,0 +1,5 @@
+/* Styling for all TaskManagerBox components */
+.task-manager-box {
+    -fx-alignment: center;
+    -fx-spacing: 10px;
+}
